@@ -3,66 +3,244 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="A clickable tour of SweetMap for cake lovers and home bakers.">
+<meta name="description" content="Watch a 50-second film, then click through SweetMap for cake lovers and home bakers.">
 <meta property="og:title" content="SweetMap Walkthrough">
 <meta property="og:description" content="Find a home baker, order from a photo, and watch your cake come to life.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1562777717-dc6984f65a63?auto=format&fit=crop&w=1200&h=630&q=70">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#733D26">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>SweetMap Walkthrough</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800;6..12,900&family=Satisfy&display=swap">
 <style>
-/* Layout: brand band on top, mode switch, then a two-column stage (story on the left, live phone on the right) that stacks phone-first on mobile. Uses SweetMap's own palette and type. */
+/* Page: sticky nav, photo hero with live phones, a coded film, use cases, screen gallery, the clickable tour, setup guide, FAQ. Uses SweetMap's own palette and type. */
 :root{
   --bg:#FBF4F3; --surface:#FFFFFF; --fg:#3B2418; --muted:#86675A; --line:#ECD9D8;
   --accent:#733D26; --accent-fg:#FFFFFF; --petal:#F8B0C8; --soft:#F6EAEC; --ring:#E86A97;
-  --band1:#5E3020; --band2:#7A4029; --band-fg:#FBEFEA;
+  --band1:#5E3020; --band2:#7A4029; --band-fg:#FBEFEA; --nav:rgba(251,244,243,.86);
   --ff-body:"Nunito Sans","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
   --ff-script:Satisfy,"Brush Script MT",cursive;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#1E120D; --surface:#2A1A13; --fg:#F7ECE8; --muted:#C4A497; --line:#45291E;
   --accent:#F8B0C8; --accent-fg:#3B1E12; --petal:#F8B0C8; --soft:#34211A; --ring:#F8B0C8;
-  --band1:#2E1810; --band2:#4A2717; --band-fg:#FBEFEA; color-scheme:dark}}
+  --band1:#2E1810; --band2:#4A2717; --band-fg:#FBEFEA; --nav:rgba(30,18,13,.86); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#1E120D; --surface:#2A1A13; --fg:#F7ECE8; --muted:#C4A497; --line:#45291E;
   --accent:#F8B0C8; --accent-fg:#3B1E12; --petal:#F8B0C8; --soft:#34211A; --ring:#F8B0C8;
-  --band1:#2E1810; --band2:#4A2717; --band-fg:#FBEFEA; color-scheme:dark}
+  --band1:#2E1810; --band2:#4A2717; --band-fg:#FBEFEA; --nav:rgba(30,18,13,.86); color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--ff-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:8px}
-
-/* Brand band */
-.hero{background:radial-gradient(120% 140% at 70% 0%,var(--band2),var(--band1));color:var(--band-fg)}
-.hero .wrap{padding-block:40px 36px;display:grid;gap:18px}
-.mark{display:flex;align-items:center;gap:10px}
-.mark svg{width:34px;height:34px}
-.word{font-family:var(--ff-script);font-size:34px;line-height:1}
+.word{font-family:var(--ff-script);font-size:30px;line-height:1}
 .word b{font-weight:400;color:#F8B0C8}
-.hero h1{font-size:clamp(28px,4.6vw,46px);line-height:1.08;font-weight:900;letter-spacing:-.01em;margin:0;max-width:18ch;text-wrap:balance}
-.hero p{margin:0;max-width:58ch;color:#EBD3CA;font-size:17px}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
-.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font:800 15px var(--ff-body);border:0;cursor:pointer;text-decoration:none;transition:transform .15s}
-.btn:active{transform:scale(.97)}
-.btn-pink{background:#F8B0C8;color:#3B1E12}
-.btn-line{background:transparent;color:#FBEFEA;box-shadow:inset 0 0 0 1.5px rgba(251,239,234,.45)}
-.url{font-size:13px;color:#D9B9AC;letter-spacing:.02em}
 
-/* Mode switch */
-.modes{display:flex;gap:6px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;width:max-content;max-width:100%;margin:28px 0 8px;overflow-x:auto}
+/* Nav */
+.nav{position:sticky;top:0;z-index:30;background:var(--nav);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:18px;min-height:60px}
+.nav .brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--fg)}
+.nav .brand svg{width:28px;height:28px}
+.nav .brand .word{font-size:26px}.nav .brand .word b{color:#E86A97}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0 0 0 auto;padding:0}
+.nav ul a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:800;font-size:14px;color:var(--muted)}
+.nav ul a:hover{background:var(--soft);color:var(--fg)}
+.nav .go{margin-left:6px}
+@media (max-width:860px){.nav ul{display:none}.nav .go{margin-left:auto}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;font:800 15px var(--ff-body);border:0;cursor:pointer;text-decoration:none;transition:transform .15s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn svg{width:18px;height:18px}
+.btn-pink{background:#F8B0C8;color:#3B1E12}
+.btn-cocoa{background:var(--accent);color:var(--accent-fg)}
+.btn-line{background:transparent;color:#FBEFEA;box-shadow:inset 0 0 0 1.5px rgba(251,239,234,.45)}
+.btn-ghost{background:var(--surface);color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.sm{min-height:38px;padding:0 14px;font-size:14px}
+
+/* Hero */
+.hero{background:radial-gradient(120% 140% at 75% 0%,var(--band2),var(--band1));color:var(--band-fg);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:32px;align-items:center;padding-block:56px 64px}
+.hero .kick{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.06em;color:#F8B0C8;background:rgba(248,176,200,.12);padding:6px 12px;border-radius:999px}
+.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.04;font-weight:900;letter-spacing:-.015em;margin:16px 0 14px;text-wrap:balance}
+.hero h1 em{font-family:var(--ff-script);font-style:normal;font-weight:400;color:#F8B0C8;font-size:1.12em}
+.hero p{margin:0;max-width:52ch;color:#EBD3CA;font-size:18px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.proof{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:26px;color:#D9B9AC;font-size:14px;font-weight:700}
+.proof span{display:inline-flex;align-items:center;gap:6px}
+.proof span::before{content:"";width:6px;height:6px;border-radius:50%;background:#F8B0C8}
+.art{position:relative;height:540px}
+.art .ph{position:absolute;border-radius:22px;overflow:hidden;box-shadow:0 24px 48px -18px rgba(0,0,0,.55);background:#7A4029}
+.art .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.art .p1{width:46%;height:46%;left:0;top:4%;transform:rotate(-5deg)}
+.art .p2{width:40%;height:38%;right:0;top:0;transform:rotate(4deg)}
+.art .p3{width:44%;height:36%;left:6%;bottom:2%;transform:rotate(3deg)}
+.art .m1{position:absolute;left:30%;top:6%;z-index:3}
+.art .m2{position:absolute;right:2%;bottom:0;z-index:4}
+.float{position:absolute;z-index:6;background:#fff;color:#3B2418;border-radius:16px;padding:10px 12px;font-size:13px;font-weight:800;box-shadow:0 16px 30px -12px rgba(0,0,0,.45);display:flex;align-items:center;gap:8px;animation:bob 5s ease-in-out infinite}
+.float small{display:block;font-weight:700;color:#8B6A5C;font-size:11px}
+.float i{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;font-style:normal;flex:none}
+.f1{left:-2%;top:52%}.f2{right:-1%;top:30%;animation-delay:-2.5s}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+/* Marquee */
+.strip{overflow:hidden;padding:18px 0;background:var(--surface);border-bottom:1px solid var(--line)}
+.strip .track{display:flex;gap:12px;width:max-content;animation:marq 60s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+.strip figure{margin:0;width:180px;flex:none}
+.strip img{width:180px;height:130px;object-fit:cover;border-radius:16px;display:block;background:var(--soft)}
+.strip figcaption{font-size:13px;font-weight:800;margin-top:6px}
+.strip figcaption span{display:block;font-weight:600;color:var(--muted);font-size:12px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* Sections */
+section.blk{padding-block:72px 8px}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.shead{max-width:680px;margin-bottom:28px}
+.shead h2{font-size:clamp(26px,3.6vw,40px);line-height:1.1;margin:8px 0 10px;font-weight:900;letter-spacing:-.01em;text-wrap:balance}
+.shead p{margin:0;color:var(--muted);font-size:17px}
+
+/* Film */
+.filmwrap{display:grid;gap:12px}
+.film{position:relative;aspect-ratio:16/9;border-radius:26px;overflow:hidden;background:#1A0F0B;color:#fff;font-size:16px;isolation:isolate;box-shadow:0 30px 60px -28px rgba(60,25,10,.55)}
+@media (max-width:640px){.film{aspect-ratio:4/5;border-radius:20px}}
+.filmwrap:fullscreen{background:#000;padding:16px;display:flex;flex-direction:column;justify-content:center}
+.filmwrap:fullscreen .film{aspect-ratio:auto;flex:1;border-radius:14px}
+.filmwrap:fullscreen .chapters{display:none}
+.film.paused *,.film.paused *::before,.film.paused *::after{animation-play-state:paused!important}
+.scene{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
+.scene.on{opacity:1}
+.bgimg{position:absolute;inset:-3%;background:#3B2418 center/cover no-repeat;animation:kb 10s ease-out both}
+.bgimg.alt{animation-name:kb2}
+@keyframes kb{from{transform:scale(1.14) translate(1.5%,1%)}to{transform:scale(1)}}
+@keyframes kb2{from{transform:scale(1)}to{transform:scale(1.12) translate(-1.5%,-1%)}}
+.bgfade{opacity:0;transition:opacity 1s ease}.bgfade.show{opacity:1}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,13,7,.92) 0%,rgba(28,13,7,.62) 42%,rgba(28,13,7,.18) 100%)}
+.shade.soft{background:linear-gradient(90deg,rgba(28,13,7,.82) 0%,rgba(28,13,7,.3) 55%,rgba(28,13,7,.05) 100%)}
+.shade.full{background:rgba(28,13,7,.55)}
+.sc-text{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:40%;z-index:2}
+.sc-text.narrow{width:32%}
+.sc-k{display:inline-flex;align-items:center;gap:.5em;font-size:.78em;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#F8B0C8}
+.sc-k b{width:1.8em;height:1.8em;border-radius:50%;display:grid;place-items:center;background:#F8B0C8;color:#3B1E12;letter-spacing:0}
+.sc-h{font-size:2.35em;line-height:1.06;font-weight:900;margin:.35em 0 .35em;letter-spacing:-.01em;text-wrap:balance}
+.sc-h.script{font-family:var(--ff-script);font-weight:400;font-size:3.4em;line-height:1;letter-spacing:0;color:#FCE3EC}
+.sc-p{font-size:1.08em;color:#F1DCD3;margin:0;max-width:30em}
+.sc-phone{position:absolute;right:9%;top:50%;transform:translateY(-50%);z-index:2}
+.sc-duo{position:absolute;right:5%;top:50%;transform:translateY(-50%);z-index:2}
+.sc-duo .duo{display:flex;gap:1.4em}
+.sc-duo .lab{font-size:.8em;font-weight:900;color:#F8B0C8;text-align:center;margin-bottom:.5em;letter-spacing:.04em}
+.rv{opacity:0;animation:rv .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rv{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.rvp{opacity:0;animation:rvp .9s cubic-bezier(.2,.9,.25,1.1) forwards;animation-delay:var(--d,0s)}
+@keyframes rvp{from{opacity:0;transform:translateY(40px) scale(.94)}to{opacity:1;transform:none}}
+.stagechip{display:inline-flex;align-items:center;gap:.5em;margin-top:1em;padding:.45em .9em;border-radius:999px;background:rgba(255,255,255,.12);font-weight:900;font-size:.95em}
+.stagechip i{width:.6em;height:.6em;border-radius:50%;background:#F8B0C8;box-shadow:0 0 0 .3em rgba(248,176,200,.25)}
+.revpos{position:absolute;right:7%;top:50%;transform:translateY(-50%);width:34%;z-index:2}
+.revcard{background:#fff;color:#3B2418;border-radius:1.4em;padding:1.3em;z-index:2;box-shadow:0 2em 4em -1.5em rgba(0,0,0,.6)}
+.revcard .pill{font-size:.75em}
+.revcard h4{margin:.6em 0 .2em;font-size:1.2em;font-weight:900}
+.revcard p{margin:0;color:#7B5B4E;font-size:.92em}
+.stars{font-size:1.7em;color:#E7B84F;margin:.3em 0;letter-spacing:.05em}
+.stars span{display:inline-block;opacity:0;transform:scale(0);animation:pop .45s cubic-bezier(.2,.9,.3,1.5) forwards;animation-delay:calc(1.2s + var(--i) * .18s)}
+@keyframes pop{to{opacity:1;transform:none}}
+.confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:3}
+.confetti span{position:absolute;top:-4%;width:.55em;height:.9em;border-radius:2px;opacity:.95;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(46em) rotate(540deg)}}
+.endcard{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:2;padding:6%}
+.endcard .word{font-size:4.4em}
+.endcard p{font-size:1.25em;color:#F1DCD3;margin:.4em auto 1.3em;max-width:24em}
+.endcard .row2{display:flex;flex-wrap:wrap;gap:.7em;justify-content:center}
+.endcard .btn{font-size:max(14px,.95em)}
+.poster{position:absolute;inset:0;z-index:10;display:grid;place-items:center;background:radial-gradient(closest-side,rgba(20,8,4,.35),rgba(20,8,4,.7));border:0;cursor:pointer;color:#fff;font:inherit;padding:0}
+.poster .pbtn{display:grid;justify-items:center;gap:.8em}
+.poster .circle{width:5em;height:5em;border-radius:50%;background:#F8B0C8;color:#3B1E12;display:grid;place-items:center;box-shadow:0 0 0 .7em rgba(248,176,200,.25);transition:transform .2s}
+.poster:hover .circle{transform:scale(1.06)}
+.poster .circle svg{width:2em;height:2em;margin-left:.2em}
+.poster b{font-size:1.15em;font-weight:900}
+.poster small{font-size:.85em;color:#F1DCD3;font-weight:700}
+.film.portrait .sc-text,.film.portrait .sc-text.narrow{left:7%;right:7%;width:auto;top:6%;transform:none}
+.film.portrait .sc-h{font-size:1.9em}
+.film.portrait .sc-h.script{font-size:2.8em}
+.film.portrait .sc-p{font-size:1em}
+.film.portrait .sc-phone,.film.portrait .sc-duo{left:50%;right:auto;top:auto;bottom:4%;transform:translateX(-50%)}
+.film.portrait .shade{background:linear-gradient(180deg,rgba(28,13,7,.92) 0%,rgba(28,13,7,.6) 45%,rgba(28,13,7,.35) 100%)}
+.film.portrait .shade.soft{background:linear-gradient(180deg,rgba(28,13,7,.85) 0%,rgba(28,13,7,.35) 45%,rgba(28,13,7,.05) 100%)}
+.film.portrait .revpos{left:8%;right:8%;width:auto;top:auto;bottom:7%;transform:none}
+.film.portrait .s0 .sc-text,.film.portrait .s5 .sc-text{top:auto;bottom:auto;top:8%}
+.film.portrait .stagechip{display:none}
+.fctrl{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px}
+.filmwrap:fullscreen .fctrl{background:#1A0F0B;border-color:#3a2318;color:#fff}
+.fctrl button{width:40px;height:40px;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;background:var(--accent);color:var(--accent-fg);flex:none}
+.fctrl button.plain{background:transparent;color:var(--fg)}
+.filmwrap:fullscreen .fctrl button.plain{color:#fff}
+.fctrl svg{width:18px;height:18px}
+.bar{position:relative;flex:1;height:28px;cursor:pointer;display:flex;align-items:center}
+.bar .tr{position:absolute;left:0;right:0;height:6px;border-radius:6px;background:var(--line)}
+.bar .fill{position:absolute;left:0;height:6px;border-radius:6px;background:var(--ring);width:0}
+.bar .tick{position:absolute;width:2px;height:10px;background:var(--bg);top:9px}
+.time{font-size:13px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chapters{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chapters::-webkit-scrollbar{display:none}
+.chapters button{flex:none;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:800 13px var(--ff-body);cursor:pointer}
+.chapters button img{width:28px;height:28px;border-radius:50%;object-fit:cover}
+.chapters button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+
+/* Why */
+.probs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.prob{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.prob img{width:100%;height:180px;object-fit:cover;display:block;background:var(--soft)}
+.prob .in{padding:18px;display:grid;gap:10px}
+.prob .was{font-size:14px;color:var(--muted);display:flex;gap:8px}
+.prob .was::before{content:"✕";flex:none;width:20px;height:20px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:11px;font-weight:900;color:var(--muted)}
+.prob .now{font-size:15px;font-weight:700;display:flex;gap:8px}
+.prob .now::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font-size:11px;font-weight:900}
+.prob h3{margin:0;font-size:18px;font-weight:900}
+.occ{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:56px}
+.occ figure{margin:0;position:relative;border-radius:22px;overflow:hidden;min-height:250px;display:flex;align-items:flex-end;background:#5E3020}
+.occ img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.occ figure:hover img{transform:scale(1.05)}
+.occ figcaption{position:relative;padding:18px;color:#fff;background:linear-gradient(transparent,rgba(28,13,7,.9) 45%);width:100%}
+.occ figcaption b{font-size:19px;font-weight:900;display:block}
+.occ figcaption span{font-size:14px;color:#F1DCD3}
+.occ .tag{position:absolute;top:12px;left:12px;background:#fff;color:#3B2418;font-size:11px;font-weight:900;padding:4px 10px;border-radius:999px;letter-spacing:.04em}
+.aud{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
+.audc{border-radius:26px;overflow:hidden;position:relative;color:#fff;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;background:#5E3020}
+.audc>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.audc .in{position:relative;padding:26px;background:linear-gradient(transparent,rgba(28,13,7,.94) 38%)}
+.audc h3{font-size:26px;margin:0 0 6px;font-weight:900}
+.audc ul{margin:10px 0 18px;padding:0;list-style:none;display:grid;gap:6px;color:#F1DCD3;font-size:15px}
+.audc li{display:flex;gap:8px}.audc li::before{content:"";width:7px;height:7px;border-radius:50%;background:#F8B0C8;margin-top:8px;flex:none}
+
+/* Gallery */
+.gal{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 4px 18px;scrollbar-width:thin}
+.gal button{flex:none;scroll-snap-align:start;background:transparent;border:0;padding:0;cursor:pointer;text-align:left;color:var(--fg);font:inherit;display:grid;gap:10px}
+.gal button:hover .mini{transform:translateY(-4px)}
+.gal .mini{transition:transform .25s}
+.gal .cap b{font-size:15px;font-weight:900;display:block}
+.gal .cap span{font-size:13px;color:var(--muted);max-width:190px;display:block}
+
+/* Mini phone (scaled copy of the full phone) */
+.mini{--s:.5;width:calc(330px * var(--s));height:calc(680px * var(--s));flex:none;position:relative}
+.mini>.phone{position:absolute;left:0;top:0;width:330px!important;height:680px;max-width:none;aspect-ratio:auto;transform:scale(var(--s));transform-origin:0 0}
+.mini .app{animation:none}
+.mini.static .screen{pointer-events:none}
+.mini.static .hot{animation:none}
+.mini .hl{animation:pulse 1.6s ease-out infinite;box-shadow:0 0 0 3px #E86A97}
+
+/* Tour */
+.modes{display:flex;gap:6px;padding:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;width:max-content;max-width:100%;margin:0 0 8px;overflow-x:auto}
 .modes button{min-height:42px;padding:0 18px;border-radius:999px;border:0;background:transparent;color:var(--muted);font:800 15px var(--ff-body);cursor:pointer;white-space:nowrap}
 .modes button[aria-selected="true"]{background:var(--accent);color:var(--accent-fg)}
 .lead{color:var(--muted);margin:0 0 22px;max-width:62ch}
-
-/* Stage */
-.stage{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:start;padding-bottom:56px}
-.story{min-width:0;display:grid;gap:22px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px)}
-.eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:start;padding-bottom:24px}
+.story{min-width:0;display:grid;gap:22px;position:sticky;top:84px}
 .story h2{font-size:clamp(24px,3vw,32px);line-height:1.15;margin:6px 0 10px;font-weight:900;text-wrap:balance}
 .story .body{margin:0;color:var(--fg);max-width:54ch}
 .notice{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
@@ -77,12 +255,10 @@ a{color:inherit}
 .steplist button[aria-current="step"]{background:var(--soft);color:var(--fg)}
 .steplist button[aria-current="step"] .n{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
 .steplist button.done .n{border-color:var(--petal);color:var(--accent)}
-
-/* Device */
 .device{display:grid;justify-items:center;gap:16px}
 .phone{width:min(330px,calc(100vw - 32px));aspect-ratio:330/680;max-width:100%;border-radius:46px;padding:11px;background:#1A0F0B;box-shadow:0 30px 60px -20px rgba(60,25,10,.45),0 0 0 1.5px #3a2318 inset;position:relative}
 .screen{position:relative;height:100%;border-radius:36px;overflow:hidden;background:#F8F8F7}
-.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:20px;background:#1A0F0B;z-index:5}
+.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:96px;height:26px;border-radius:20px;background:#1A0F0B;z-index:8}
 .ctrl{display:flex;align-items:center;gap:12px}
 .ctrl .count{font-weight:800;font-size:14px;color:var(--muted);min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
 .round{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);display:grid;place-items:center;cursor:pointer}
@@ -91,9 +267,11 @@ a{color:inherit}
 .round svg{width:20px;height:20px}
 
 /* Platform view */
-.platform{padding-bottom:56px;display:grid;gap:40px}
+.platform{padding-bottom:24px;display:grid;gap:40px}
 .lanes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
-.stagecard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:grid;gap:8px;align-content:start;min-width:0}
+.stagecard{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;align-content:start;min-width:0}
+.stagecard img{width:100%;height:96px;object-fit:cover;display:block;background:var(--soft)}
+.stagecard .in{padding:12px;display:grid;gap:8px}
 .stagecard .st{display:inline-flex;align-self:start;justify-self:start;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:900;color:#3B1E12}
 .stagecard p{margin:0;font-size:14px;color:var(--muted)}
 .stagecard .who{font-size:12px;font-weight:800;color:var(--fg)}
@@ -109,27 +287,75 @@ a{color:inherit}
 .role h4 span{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:var(--soft);color:var(--accent)}
 .role ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted);font-size:15px}
 
-footer{border-top:1px solid var(--line)}
+/* Setup */
+.who-switch{margin-bottom:22px}
+.steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.scard{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:18px 18px 20px;display:grid;gap:12px;align-content:start;min-width:0}
+.scard .mini{justify-self:center;--s:.56}
+.scard .num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-fg);font-weight:900;font-size:14px}
+.scard h3{margin:0;font-size:17px;font-weight:900;line-height:1.25}
+.scard p{margin:0;font-size:14.5px;color:var(--muted)}
+.scard .note{font-size:13px;background:var(--soft);border-radius:12px;padding:8px 10px;color:var(--fg)}
+.tips{display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:14px;margin-top:22px;align-items:stretch}
+.tips .lead2{background:var(--accent);color:var(--accent-fg);border-radius:22px;padding:20px;max-width:260px}
+.tips .lead2 h3{margin:0 0 6px;font-size:19px;font-weight:900}
+.tips .lead2 p{margin:0;font-size:14.5px;opacity:.9}
+.tips figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.tips img{width:100%;height:150px;object-fit:cover;display:block;background:var(--soft)}
+.tips figcaption{padding:12px 14px;font-size:14px;color:var(--muted)}
+.tips figcaption b{display:block;color:var(--fg);font-size:15px}
+
+/* FAQ + share */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;font-weight:900;padding:16px 0;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:20px;line-height:1;color:var(--accent)}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.share{margin:80px 0 0;border-radius:30px;overflow:hidden;position:relative;color:#fff;background:#5E3020}
+.share>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.share .in{position:relative;padding:56px 40px;background:linear-gradient(90deg,rgba(28,13,7,.94),rgba(28,13,7,.6) 60%,rgba(28,13,7,.2));display:grid;gap:14px;max-width:none}
+.share h2{margin:0;font-size:clamp(26px,3.6vw,40px);font-weight:900;line-height:1.1;max-width:16ch}
+.share p{margin:0;color:#F1DCD3;max-width:44ch}
+
+footer{border-top:1px solid var(--line);margin-top:72px}
 footer .wrap{padding-block:22px 34px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;color:var(--muted);font-size:14px}
 
-@media (max-width:1000px){.lanes{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1000px){.lanes{grid-template-columns:repeat(3,minmax(0,1fr))}.steps4{grid-template-columns:repeat(2,minmax(0,1fr))}.tips{grid-template-columns:repeat(3,minmax(0,1fr))}.tips .lead2{grid-column:1/-1;max-width:none}}
 @media (max-width:860px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);padding-block:36px 40px}
+  .art{height:440px;max-width:460px;width:100%;margin:0 auto}
   .stage{grid-template-columns:minmax(0,1fr);gap:24px}
   .device{order:-1}
   .story{position:static}
-  .grid3{grid-template-columns:1fr}
-  .roles{grid-template-columns:1fr}
+  .grid3,.roles,.probs,.aud,.faq{grid-template-columns:1fr}
+  .occ{grid-template-columns:1fr 1fr}
+  .audc{min-height:360px}
 }
-@media (max-width:520px){.lanes{grid-template-columns:repeat(2,minmax(0,1fr))}.hero .wrap{padding-block:28px}}
+@media (max-width:560px){
+  .lanes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .occ{grid-template-columns:1fr}
+  .occ figure{min-height:210px}
+  .steps4{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 10px}
+  .steps4 .scard{flex:none;width:82%;scroll-snap-align:center}
+  .tips{grid-template-columns:1fr}
+  .tips img{height:170px}
+  .share .in{padding:36px 22px;background:linear-gradient(180deg,rgba(28,13,7,.7),rgba(28,13,7,.94))}
+  section.blk{padding-top:56px}
+  .fctrl{gap:8px}
+}
+@media (prefers-reduced-motion:reduce){.strip .track,.float{animation:none}.occ img{transition:none}}
 
 /* ============ Recreated app UI (SweetMap's own palette, light) ============ */
 .app{--cocoa:#733D26;--ink:#543727;--blush:#F9D0DE;--petal:#F8B0C8;--cream:#F8F8F7;--beige:#F6EAEC;--sand:#ECD9D8;--butter:#FBEACF;--mint:#DDEDE4;--sky:#E3E5F1;--lilac:#EEDDEE;--sub:#8B6A5C;
   position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;color:var(--ink);font-family:var(--ff-body);font-size:13px;line-height:1.4;background:var(--cream);scrollbar-width:none;animation:in .35s ease}
 .app::-webkit-scrollbar{display:none}
 @keyframes in{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.app{animation:none}.hot{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.app{animation:none}.hot,.mini .hl{animation:none!important}}
 .sbar{height:44px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px 6px;font-size:12px;font-weight:800;color:var(--cream);background:var(--cocoa)}
 .sbar.light{background:var(--cream);color:var(--ink)}
+.sbar.clear{background:transparent;color:#fff}
 .top{background:var(--cocoa);color:var(--cream);padding:6px 16px 14px;display:flex;align-items:center;justify-content:space-between}
 .top .w{font-family:var(--ff-script);font-size:24px;line-height:1}.top .w b{font-weight:400;color:var(--petal)}
 .icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2)}
@@ -153,18 +379,18 @@ footer .wrap{padding-block:22px 34px;display:flex;flex-wrap:wrap;gap:10px 24px;j
 .tabs span.on{color:var(--ink)}
 .tabs span.on::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:3px;border-radius:3px;background:var(--cocoa)}
 .pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:800}
-.p-sky{background:var(--sky);color:#33546F}.p-butter{background:var(--butter);color:#6B571C}.p-lilac{background:var(--lilac);color:#4F3D6B}.p-mint{background:var(--mint);color:#2F6350}.p-blush{background:var(--blush);color:#7A2B48}
+.p-sky{background:#E3E5F1;color:#33546F}.p-butter{background:#FBEACF;color:#6B571C}.p-lilac{background:#EEDDEE;color:#4F3D6B}.p-mint{background:#DDEDE4;color:#2F6350}.p-blush{background:#F9D0DE;color:#7A2B48}
 .av{border-radius:50%;display:grid;place-items:center;font-weight:900;color:#fff;flex:none}
 .row{display:flex;align-items:center;gap:10px}
 .star{color:#E7B84F}
-.thumb{border-radius:14px;overflow:hidden;display:grid;place-items:center}
-.thumb svg{width:78%;height:auto}
+.thumb{border-radius:14px;overflow:hidden;display:block;position:relative}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .toast{position:absolute;left:14px;right:14px;bottom:16px;background:var(--ink);color:var(--cream);border-radius:14px;padding:11px 14px;font-weight:800;font-size:12.5px;display:flex;gap:8px;align-items:center;animation:in .3s ease;z-index:4}
 .hot{position:relative;cursor:pointer;animation:pulse 1.6s ease-out infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,106,151,.65)}70%{box-shadow:0 0 0 12px rgba(232,106,151,0)}100%{box-shadow:0 0 0 0 rgba(232,106,151,0)}}
 .timeline{display:grid;gap:0;margin-top:6px}
 .tl{display:grid;grid-template-columns:22px 1fr;gap:10px;min-height:40px}
-.tl .dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--sand);background:#fff;margin:2px auto 0;position:relative}
+.tl .dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--sand);background:#fff;margin:2px auto 0;position:relative;transition:background .3s}
 .tl:not(:last-child) .dot::after{content:"";position:absolute;left:50%;top:14px;width:2px;height:28px;transform:translateX(-50%);background:var(--sand)}
 .tl.done .dot{background:var(--cocoa);border-color:var(--cocoa)}
 .tl.done:not(:last-child) .dot::after{background:var(--cocoa)}
@@ -178,114 +404,283 @@ footer .wrap{padding-block:22px 34px;display:flex;flex-wrap:wrap;gap:10px 24px;j
 .toggle{width:40px;height:24px;border-radius:999px;background:var(--sand);position:relative;flex:none}
 .toggle::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s}
 .toggle.on{background:var(--cocoa)}.toggle.on::after{left:19px}
-.drop{border:2px dashed var(--sand);border-radius:18px;padding:16px;text-align:center;color:var(--sub);font-size:11.5px;display:grid;justify-items:center;gap:6px}
 .secthead{display:flex;align-items:center;gap:8px;font-weight:900;font-size:13px;margin:14px 0 6px}
 .secthead i{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--cocoa);color:var(--cream);display:grid;place-items:center;font-size:11px}
+.urlbar{margin:4px 12px 0;background:#ECE7E5;border-radius:12px;padding:8px 12px;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#3B2418}
+.urlbar .shr{margin-left:auto;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:#2F6FD6}
+.dim{position:absolute;inset:0;background:rgba(20,10,6,.45);z-index:3}
+.sheet{position:absolute;left:8px;right:8px;bottom:8px;z-index:4;background:#F3F1F0;border-radius:22px;padding:12px;display:grid;gap:8px}
+.sheet .hd{display:flex;align-items:center;gap:10px;padding:4px 4px 10px;border-bottom:1px solid #E2DDDB}
+.sheet .grp{background:#fff;border-radius:14px;overflow:hidden}
+.sheet .it{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;font-weight:700;border-bottom:1px solid #EFEBEA}
+.sheet .it:last-child{border-bottom:0}
+.sheet .it.hl{border-radius:12px;position:relative;z-index:1;background:#fff}
+.appicon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin:0 auto;box-shadow:0 4px 10px -4px rgba(0,0,0,.35)}
+.home{position:absolute;inset:0;background:linear-gradient(165deg,#F6C9D7 0%,#C98C9F 40%,#733D26 100%)}
+.home .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 6px;padding:22px 16px}
+.home .grid div{text-align:center;color:#fff;font-size:10.5px;font-weight:700}
+.home .grid div span{display:block;margin-top:5px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.home .dock{position:absolute;left:12px;right:12px;bottom:14px;height:78px;border-radius:26px;background:rgba(255,255,255,.28);display:flex;justify-content:space-around;align-items:center}
+.notif{position:absolute;left:10px;right:10px;top:46px;z-index:6;background:rgba(255,255,255,.97);border-radius:18px;padding:10px 12px;box-shadow:0 12px 26px -8px rgba(0,0,0,.4);display:flex;gap:10px;align-items:center;transform:translateY(-160%);transition:transform .6s cubic-bezier(.2,.9,.3,1.2)}
+.notif.show{transform:none}
+.tapdot{position:absolute;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(232,106,151,.4);border:2.5px solid #fff;z-index:9;pointer-events:none;animation:tap 1s ease-out forwards;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+@keyframes tap{0%{transform:scale(.3);opacity:0}25%{transform:scale(1);opacity:1}55%{transform:scale(.82);opacity:1}100%{transform:scale(1.5);opacity:0}}
 </style>
 </head>
 <body>
 
-
-<header class="hero">
+<nav class="nav" aria-label="Sections">
   <div class="wrap">
-    <div class="mark">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="34" rx="12" ry="3.6" fill="none" stroke="#F8B0C8" stroke-width="2.4"/><path d="M20 33C12 24 8 19 8 14a12 12 0 0 1 24 0c0 5-4 10-12 19z" fill="#F8B0C8"/><path d="M20 19.5c-3.4-2.5-5-4.2-5-6.1 0-1.6 1.2-2.7 2.6-2.7 1 0 1.9.6 2.4 1.4.5-.8 1.4-1.4 2.4-1.4 1.4 0 2.6 1.1 2.6 2.7 0 1.9-1.6 3.6-5 6.1z" fill="#733D26"/></svg>
+    <a class="brand" href="#top" aria-label="SweetMap walkthrough, back to top">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="34" rx="12" ry="3.6" fill="none" stroke="#E86A97" stroke-width="2.4"/><path d="M20 33C12 24 8 19 8 14a12 12 0 0 1 24 0c0 5-4 10-12 19z" fill="#F8B0C8"/><path d="M20 19.5c-3.4-2.5-5-4.2-5-6.1 0-1.6 1.2-2.7 2.6-2.7 1 0 1.9.6 2.4 1.4.5-.8 1.4-1.4 2.4-1.4 1.4 0 2.6 1.1 2.6 2.7 0 1.9-1.6 3.6-5 6.1z" fill="#733D26"/></svg>
       <span class="word"><b>Sweet</b>Map</span>
+    </a>
+    <ul>
+      <li><a href="#film">Film</a></li>
+      <li><a href="#why">Why SweetMap</a></li>
+      <li><a href="#screens">Screens</a></li>
+      <li><a href="#tour">Try it</a></li>
+      <li><a href="#setup">Get started</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-cocoa sm go" href="https://sweetmap.vercel.app/" target="_blank" rel="noopener">Open app ↗</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="kick">Home bakers · Cake lovers · Zambia</span>
+      <h1>Find a home baker, order from a photo, and watch your cake <em>come to life.</em></h1>
+      <p>SweetMap is a cake marketplace for your phone. Cake lovers discover real cakes from home kitchens nearby and order straight from a photo. Home bakers get a free storefront and an order book that keeps customers updated.</p>
+      <div class="cta">
+        <a class="btn btn-pink" href="#film" id="watch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>Watch the 50-second film</a>
+        <a class="btn btn-line" href="#tour">Click through the app</a>
+      </div>
+      <div class="proof"><span>Nothing to download</span><span>Prices in Kwacha</span><span>Six-stage order tracking</span></div>
     </div>
-    <h1>Find a home baker, order from a photo, and watch your cake come to life.</h1>
-    <p>A clickable tour of SweetMap. Follow a cake lover from first sign-up to delivery, then switch sides and see how a home baker runs their shop. Tap the glowing spots on the phone, or use the arrow keys.</p>
-    <div class="cta">
-      <a class="btn btn-pink" href="#customer" id="start">Start the tour</a>
-      <a class="btn btn-line" href="https://sweetmap.vercel.app/" target="_blank" rel="noopener">Open the live app ↗</a>
+    <div class="art" aria-hidden="true">
+      <div class="ph p1"><img data-ph="bloom" data-w="420" data-h="420" alt=""></div>
+      <div class="ph p2"><img data-ph="pipe" data-w="380" data-h="340" alt=""></div>
+      <div class="ph p3"><img data-ph="cup" data-w="400" data-h="320" alt=""></div>
+      <div class="m1" id="heroA"></div>
+      <div class="m2" id="heroB"></div>
+      <div class="float f1"><i style="background:#F9D0DE;color:#7A2B48">♥</i><span>New order · K450<small>Pastel bloom birthday cake</small></span></div>
+      <div class="float f2"><i style="background:#EEDDEE;color:#4F3D6B">●</i><span>Baking<small>Chipo can see it live</small></span></div>
     </div>
-    <span class="url">sweetmap.vercel.app · works in any phone browser, add it to your home screen</span>
   </div>
 </header>
 
-<main class="wrap" id="tour">
-  <div class="modes" role="tablist" aria-label="Choose a tour">
-    <button role="tab" id="tab-customer" data-mode="customer" aria-selected="true">Cake lover</button>
-    <button role="tab" id="tab-baker" data-mode="baker" aria-selected="false">Baker</button>
-    <button role="tab" id="tab-platform" data-mode="platform" aria-selected="false">How it works</button>
-  </div>
-  <p class="lead" id="lead"></p>
+<div class="strip" aria-label="Cakes like the ones on SweetMap"><div class="track" id="strip"></div></div>
 
-  <section class="stage" id="stage">
-    <div class="story">
-      <div>
-        <div class="eyebrow" id="eyebrow"></div>
-        <h2 id="stitle"></h2>
-        <p class="body" id="sbody"></p>
-        <ul class="notice" id="snotice"></ul>
-        <div class="tip" id="stip"><i></i><span>Tap the glowing spot on the phone to continue</span></div>
-      </div>
-      <ol class="steplist" id="steplist"></ol>
+<main>
+  <!-- FILM -->
+  <section class="blk wrap" id="film" aria-labelledby="film-h">
+    <div class="shead">
+      <span class="eyebrow">The film</span>
+      <h2 id="film-h">One cake, from first scroll to five stars</h2>
+      <p>A short animated story of how one order moves through SweetMap, told from both sides: Chipo who wants the cake, and Mutinta who bakes it.</p>
     </div>
-    <div class="device">
-      <div class="phone"><div class="notch"></div><div class="screen" id="screen"></div></div>
-      <div class="ctrl">
-        <button class="round" id="prev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <span class="count" id="count"></span>
-        <button class="round primary" id="next" aria-label="Next step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="filmwrap" id="filmwrap">
+      <div class="film paused" id="filmbox" role="region" aria-label="SweetMap film" aria-roledescription="animated video">
+        <div id="scenes"></div>
+        <button class="poster" id="poster" aria-label="Play the film">
+          <span class="pbtn"><span class="circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span><b>Play the film</b><small id="ptime">50 seconds · no sound needed</small></span>
+        </button>
+      </div>
+      <div class="fctrl">
+        <button id="fplay" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+        <div class="bar" id="fbar" role="slider" aria-label="Film progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><span class="tr"></span><span class="fill" id="ffill"></span></div>
+        <span class="time" id="ftime">0:00</span>
+        <button class="plain" id="ffull" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      </div>
+      <div class="chapters" id="chapters" aria-label="Film chapters"></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="blk wrap" id="why" aria-labelledby="why-h">
+    <div class="shead">
+      <span class="eyebrow">Why SweetMap</span>
+      <h2 id="why-h">Great cakes are already being baked at home. They're just hard to find.</h2>
+      <p>Many of the best cakes in town come from home kitchens. Usually you only find them through a friend, a WhatsApp status or a Facebook post. Ordering one means a long chat, sending photos back and forth, and wondering if it will be ready in time. SweetMap puts all of that in one place.</p>
+    </div>
+    <div class="probs">
+      <article class="prob"><img data-ph="shelf" data-w="640" data-h="360" alt="Cakes and breads on bakery shelves" loading="lazy"><div class="in"><h3>Finding a baker</h3><div class="was">Ask around, scroll statuses, hope someone replies.</div><div class="now">Browse real cakes and bakers near you, sorted by distance, with ratings and prices.</div></div></article>
+      <article class="prob"><img data-ph="pipe" data-w="640" data-h="360" alt="Baker piping cream onto a cake" loading="lazy"><div class="in"><h3>Explaining what you want</h3><div class="was">Screenshots, voice notes, and "how much for this one?"</div><div class="now">Order straight from a design photo. Flavour, size, date, budget and message go in one form.</div></div></article>
+      <article class="prob"><img data-ph="choc" data-w="640" data-h="360" alt="Chocolate drip cake with cream rosettes" loading="lazy"><div class="in"><h3>Knowing it's on track</h3><div class="was">"Is my cake ready?" messages on the morning of the party.</div><div class="now">A tracker moves from Order received to Delivered as the baker works.</div></div></article>
+    </div>
+
+    <div class="shead" style="margin-top:64px;margin-bottom:0">
+      <span class="eyebrow">Made for moments</span>
+      <h2>Every occasion has a baker nearby</h2>
+    </div>
+    <div class="occ" style="margin-top:24px">
+      <figure><img data-ph="rainbow" data-w="600" data-h="500" alt="Rainbow layer birthday cake with sprinkles" loading="lazy"><span class="tag">BIRTHDAYS</span><figcaption><b>Birthday cakes</b><span>Order from a photo you love and add the name in gold.</span></figcaption></figure>
+      <figure><img data-ph="berry" data-w="600" data-h="500" alt="White two-tier cake with fresh berries" loading="lazy"><span class="tag">WEDDINGS</span><figcaption><b>Weddings and tiered cakes</b><span>Compare storefronts, reviews and prices before you commit.</span></figcaption></figure>
+      <figure><img data-ph="cup" data-w="600" data-h="500" alt="Cupcakes with white frosting and sprinkles" loading="lazy"><span class="tag">PARTIES</span><figcaption><b>Cupcakes by the dozen</b><span>School days, baby showers and kids' parties.</span></figcaption></figure>
+      <figure><img data-ph="forest" data-w="600" data-h="500" alt="Chocolate cake with cherries" loading="lazy"><span class="tag">URGENT</span><figcaption><b>Need it tomorrow?</b><span>Post an urgent request and nearby bakers send quotes.</span></figcaption></figure>
+      <figure><img data-ph="grad" data-w="600" data-h="500" alt="White cake with dark chocolate drip" loading="lazy"><span class="tag">MILESTONES</span><figcaption><b>Graduations and farewells</b><span>Office and family celebrations, delivered to your area.</span></figcaption></figure>
+      <figure><img data-ph="bento" data-w="600" data-h="500" alt="Pink drip cake topped with cookies" loading="lazy"><span class="tag">JUST BECAUSE</span><figcaption><b>Bento and treat cakes</b><span>Small cakes for two, from bakers you follow.</span></figcaption></figure>
+    </div>
+
+    <div class="aud">
+      <div class="audc"><img data-ph="pinkcup" data-w="800" data-h="700" alt="Pink swirl cupcakes" loading="lazy"><div class="in"><span class="eyebrow" style="color:#F8B0C8">For cake lovers</span><h3>Find it, order it, follow it.</h3><ul><li>A feed of cakes: For you, Following, Nearby</li><li>Bakers sorted by distance, with reviews</li><li>Order from the photo, chat with the baker</li><li>Watch every stage until it's delivered</li></ul><a class="btn btn-pink" href="#customer" data-mode-link="customer">Try the cake lover tour</a></div></div>
+      <div class="audc"><img data-ph="pipe" data-w="800" data-h="700" alt="Baker icing a layered cake" loading="lazy"><div class="in"><span class="eyebrow" style="color:#F8B0C8">For home bakers</span><h3>A shop window and an order book.</h3><ul><li>Free storefront with gallery, followers and reviews</li><li>Every order arrives with the full brief</li><li>One-tap status updates customers can see</li><li>Quote on urgent jobs on quiet days</li></ul><a class="btn btn-pink" href="#baker" data-mode-link="baker">Try the baker tour</a></div></div>
+    </div>
+  </section>
+
+  <!-- SCREENS -->
+  <section class="blk wrap" id="screens" aria-labelledby="screens-h">
+    <div class="shead">
+      <span class="eyebrow">Screens at a glance</span>
+      <h2 id="screens-h">What it looks like on your phone</h2>
+      <p>Tap any screen to open it in the interactive tour below.</p>
+    </div>
+    <div class="gal" id="gallery"></div>
+  </section>
+
+  <!-- TOUR -->
+  <section class="blk wrap" id="tour" aria-labelledby="tour-h">
+    <div class="shead">
+      <span class="eyebrow">Try it yourself</span>
+      <h2 id="tour-h">Click through SweetMap</h2>
+      <p>Tap the glowing spots on the phone, or use the arrow keys. Switch sides to see the same order from the baker's kitchen.</p>
+    </div>
+    <div class="modes" role="tablist" aria-label="Choose a tour">
+      <button role="tab" id="tab-customer" data-mode="customer" aria-selected="true">Cake lover</button>
+      <button role="tab" id="tab-baker" data-mode="baker" aria-selected="false">Baker</button>
+      <button role="tab" id="tab-platform" data-mode="platform" aria-selected="false">How it works</button>
+    </div>
+    <p class="lead" id="lead"></p>
+
+    <div class="stage" id="stage">
+      <div class="story">
+        <div>
+          <div class="eyebrow" id="eyebrow"></div>
+          <h2 id="stitle"></h2>
+          <p class="body" id="sbody"></p>
+          <ul class="notice" id="snotice"></ul>
+          <div class="tip" id="stip"><i></i><span>Tap the glowing spot on the phone to continue</span></div>
+        </div>
+        <ol class="steplist" id="steplist"></ol>
+      </div>
+      <div class="device">
+        <div class="phone"><div class="notch"></div><div class="screen" id="screen"></div></div>
+        <div class="ctrl">
+          <button class="round" id="prev" aria-label="Previous step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <span class="count" id="count"></span>
+          <button class="round primary" id="next" aria-label="Next step"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="platform" id="platform" hidden>
+      <div class="sec">
+        <h3>One order, two screens</h3>
+        <p>Every order moves through the same six stages. The baker moves it forward from their dashboard, and the customer sees each change on their tracking page straight away.</p>
+        <div class="lanes">
+          <div class="stagecard"><img data-ph="lilac" data-w="320" data-h="200" alt="" loading="lazy"><div class="in"><span class="st" style="background:#E3E5F1">Order received</span><p>Customer sends the full brief: design, flavour, size, date, budget.</p><span class="who">Customer → Baker</span></div></div>
+          <div class="stagecard"><img data-ph="shelf" data-w="320" data-h="200" alt="" loading="lazy"><div class="in"><span class="st" style="background:#FBEACF">Accepted</span><p>Baker confirms the job. Payment is agreed only after this point.</p><span class="who">Baker</span></div></div>
+          <div class="stagecard"><img data-ph="slice" data-w="320" data-h="200" alt="" loading="lazy"><div class="in"><span class="st" style="background:#EEDDEE">Baking</span><p>Sponges in the oven. Customer can message with last-minute notes.</p><span class="who">Baker</span></div></div>
+          <div class="stagecard"><img data-ph="pipe" data-w="320" data-h="200" alt="" loading="lazy"><div class="in"><span class="st" style="background:#F9D0DE">Decorating</span><p>Icing, toppers and the message on the cake.</p><span class="who">Baker</span></div></div>
+          <div class="stagecard"><img data-ph="bloom" data-w="320" data-h="200" alt="" loading="lazy"><div class="in"><span class="st" style="background:#DDEDE4">Ready</span><p>Ready for pickup or out for delivery to the customer's area.</p><span class="who">Baker → Customer</span></div></div>
+          <div class="stagecard"><img data-ph="balloons" data-w="320" data-h="200" alt="" loading="lazy"><div class="in"><span class="st" style="background:#F8B0C8">Delivered</span><p>Order closes and the customer can leave a review on the storefront.</p><span class="who">Customer</span></div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h3>Two account types, two toolsets</h3>
+        <p>People choose their role when they sign up. Each account only sees the tools that make sense for it, which keeps the app simple on both sides.</p>
+        <div class="roles">
+          <div class="role">
+            <h4><span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 5.2 3 1.6-1.8 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></span>Cake lover</h4>
+            <ul>
+              <li>Browse a feed of cake designs: For you, Following, Nearby</li>
+              <li>Filter by category, flavour or area</li>
+              <li>Find bakers near you, sorted by distance</li>
+              <li>Save designs and follow favourite bakers</li>
+              <li>Order straight from a design photo</li>
+              <li>Track each order stage and chat with the baker</li>
+              <li>Post an urgent request and pick from bakers' quotes</li>
+            </ul>
+          </div>
+          <div class="role">
+            <h4><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 13.9V20h12v-6.1M6 14a4 4 0 1 1 1.2-7.8 5 5 0 0 1 9.6 0A4 4 0 1 1 18 14z"/><path d="M6 17h12"/></svg></span>Baker</h4>
+            <ul>
+              <li>A free storefront with gallery, followers and reviews</li>
+              <li>Dashboard of incoming, in-progress and delivered orders</li>
+              <li>One-tap status updates that customers can follow</li>
+              <li>Post designs with photo, price in Kwacha and tags</li>
+              <li>Set prices-from, delivery areas and a weekend special</li>
+              <li>Mark yourself fully booked when the oven is full</li>
+              <li>Quote on urgent requests from nearby customers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h3>Under the hood</h3>
+        <p>Built as a web app that installs to the phone home screen, so there is nothing to download from an app store.</p>
+        <div class="grid3">
+          <div class="feat"><h4>Location by area or GPS</h4><p>Type a neighbourhood like Kabulonga, or tap the crosshair for exact distance. Works fine when location is switched off.</p></div>
+          <div class="feat"><h4>Light on data</h4><p>Photos are resized on the phone before upload, which saves bundles for bakers posting from the kitchen.</p></div>
+          <div class="feat"><h4>Secure accounts</h4><p>Sign-in, photos and chat run on Supabase. SweetMap never stores passwords.</p></div>
+          <div class="feat"><h4>Smart discovery</h4><p>Bakers who are taking orders, rated higher and followed more rise to the top of results.</p></div>
+          <div class="feat"><h4>Kwacha pricing</h4><p>Prices, budgets and quotes are in K. Phone and WhatsApp numbers sit on every storefront.</p></div>
+          <div class="feat"><h4>Admin controls</h4><p>An admin area can pause accounts and switch on maintenance mode, keeping the marketplace trustworthy.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="platform" id="platform" hidden>
-    <div class="sec">
-      <h3>One order, two screens</h3>
-      <p>Every order moves through the same six stages. The baker moves it forward from their dashboard, and the customer sees each change on their tracking page straight away.</p>
-      <div class="lanes">
-        <div class="stagecard"><span class="st" style="background:#E3E5F1">Order received</span><p>Customer sends the full brief: design, flavour, size, date, budget.</p><span class="who">Customer → Baker</span></div>
-        <div class="stagecard"><span class="st" style="background:#FBEACF">Accepted</span><p>Baker confirms the job. Payment is agreed only after this point.</p><span class="who">Baker</span></div>
-        <div class="stagecard"><span class="st" style="background:#EEDDEE">Baking</span><p>Sponges in the oven. Customer can message with last-minute notes.</p><span class="who">Baker</span></div>
-        <div class="stagecard"><span class="st" style="background:#F9D0DE">Decorating</span><p>Icing, toppers and the message on the cake.</p><span class="who">Baker</span></div>
-        <div class="stagecard"><span class="st" style="background:#DDEDE4">Ready</span><p>Ready for pickup or out for delivery to the customer's area.</p><span class="who">Baker → Customer</span></div>
-        <div class="stagecard"><span class="st" style="background:#F8B0C8">Delivered</span><p>Order closes and the customer can leave a review on the storefront.</p><span class="who">Customer</span></div>
-      </div>
+  <!-- SETUP -->
+  <section class="blk wrap" id="setup" aria-labelledby="setup-h">
+    <div class="shead">
+      <span class="eyebrow">Get started</span>
+      <h2 id="setup-h">Set up in about two minutes</h2>
+      <p>SweetMap runs in your phone's browser. Add it to your home screen once and it opens like any other app.</p>
+    </div>
+    <div class="modes who-switch" role="tablist" aria-label="Choose a setup guide">
+      <button role="tab" data-setup="customer" aria-selected="true">I want a cake</button>
+      <button role="tab" data-setup="baker" aria-selected="false">I'm a baker</button>
+    </div>
+    <div class="steps4" id="setupSteps"></div>
+    <div class="tips" id="bakerTips" hidden>
+      <div class="lead2"><h3>Photo tips that win orders</h3><p>Your photos are your shop window. Customers order from what they see.</p></div>
+      <figure><img data-ph="grad" data-w="480" data-h="300" alt="Cake photographed in soft daylight" loading="lazy"><figcaption><b>Use daylight</b>Shoot near a window. Skip the flash and the yellow kitchen light.</figcaption></figure>
+      <figure><img data-ph="mintcup" data-w="480" data-h="300" alt="Cupcake on a plain light background" loading="lazy"><figcaption><b>Keep the background plain</b>A clean table or a sheet of paper keeps eyes on the cake.</figcaption></figure>
+      <figure><img data-ph="slice" data-w="480" data-h="300" alt="Slice of layered cake" loading="lazy"><figcaption><b>Show the inside</b>One photo of a slice tells people about flavour and layers.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="blk wrap" id="faq" aria-labelledby="faq-h">
+    <div class="shead">
+      <span class="eyebrow">Questions</span>
+      <h2 id="faq-h">Good to know</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Do I need to download an app?</summary><p>No. Open sweetmap.vercel.app in your phone's browser. You can add it to your home screen so it opens like an app, with nothing to install from an app store.</p></details>
+      <details><summary>How does payment work?</summary><p>You send an order request with your budget. The baker accepts first, and payment is agreed with the baker only after that, so nothing is due before they confirm.</p></details>
+      <details><summary>What if I need a cake tomorrow?</summary><p>Post an urgent request with what you need, when and where. Nearby bakers send quotes and you accept the one you like.</p></details>
+      <details><summary>Does it work in my area?</summary><p>Type any neighbourhood, or tap the crosshair to use GPS. Bakers list the areas they deliver to, and results are sorted by distance.</p></details>
+      <details><summary>Does it cost anything for bakers?</summary><p>Opening a storefront is free. Post designs, take orders and update statuses from the same account.</p></details>
+      <details><summary>Is my account safe?</summary><p>Sign-in, photos and chat are handled by Supabase. SweetMap never stores your password.</p></details>
     </div>
 
-    <div class="sec">
-      <h3>Two account types, two toolsets</h3>
-      <p>People choose their role when they sign up. Each account only sees the tools that make sense for it, which keeps the app simple on both sides.</p>
-      <div class="roles">
-        <div class="role">
-          <h4><span><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 5.2 3 1.6-1.8 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></span>Cake lover</h4>
-          <ul>
-            <li>Browse a feed of cake designs: For you, Following, Nearby</li>
-            <li>Filter by category, flavour or area</li>
-            <li>Find bakers near you, sorted by distance</li>
-            <li>Save designs and follow favourite bakers</li>
-            <li>Order straight from a design photo</li>
-            <li>Track each order stage and chat with the baker</li>
-            <li>Post an urgent request and pick from bakers' quotes</li>
-          </ul>
+    <div class="share">
+      <img data-ph="lilac" data-w="1400" data-h="700" alt="" loading="lazy">
+      <div class="in">
+        <span class="eyebrow" style="color:#F8B0C8">Ready when you are</span>
+        <h2>Your next cake is a few taps away.</h2>
+        <p>Open SweetMap on your phone, or share this walkthrough with a baker or a friend who's planning a party.</p>
+        <div class="cta" style="margin-top:6px">
+          <a class="btn btn-pink" href="https://sweetmap.vercel.app/" target="_blank" rel="noopener">Open SweetMap ↗</a>
+          <a class="btn btn-line" id="wa" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
+          <button class="btn btn-line" id="copy" type="button">Copy link</button>
         </div>
-        <div class="role">
-          <h4><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 13.9V20h12v-6.1M6 14a4 4 0 1 1 1.2-7.8 5 5 0 0 1 9.6 0A4 4 0 1 1 18 14z"/><path d="M6 17h12"/></svg></span>Baker</h4>
-          <ul>
-            <li>A free storefront with gallery, followers and reviews</li>
-            <li>Dashboard of incoming, in-progress and delivered orders</li>
-            <li>One-tap status updates that customers can follow</li>
-            <li>Post designs with photo, price in Kwacha and tags</li>
-            <li>Set prices-from, delivery areas and a weekend special</li>
-            <li>Mark yourself fully booked when the oven is full</li>
-            <li>Quote on urgent requests from nearby customers</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <h3>Under the hood</h3>
-      <p>Built as a web app that installs to the phone home screen, so there is nothing to download from an app store.</p>
-      <div class="grid3">
-        <div class="feat"><h4>Location by area or GPS</h4><p>Type a neighbourhood like Kabulonga, or tap the crosshair for exact distance. Works fine when location is switched off.</p></div>
-        <div class="feat"><h4>Light on data</h4><p>Photos are resized on the phone before upload, which saves bundles for bakers posting from the kitchen.</p></div>
-        <div class="feat"><h4>Secure accounts</h4><p>Sign-in, photos and chat run on Supabase. SweetMap never stores passwords.</p></div>
-        <div class="feat"><h4>Smart discovery</h4><p>Bakers who are taking orders, rated higher and followed more rise to the top of results.</p></div>
-        <div class="feat"><h4>Kwacha pricing</h4><p>Prices, budgets and quotes are in K. Phone and WhatsApp numbers sit on every storefront.</p></div>
-        <div class="feat"><h4>Admin controls</h4><p>An admin area can pause accounts and switch on maintenance mode, keeping the marketplace trustworthy.</p></div>
       </div>
     </div>
   </section>
@@ -293,41 +688,35 @@ footer .wrap{padding-block:22px 34px;display:flex;flex-wrap:wrap;gap:10px 24px;j
 
 <footer>
   <div class="wrap">
-    <span>Screens are recreated for this tour with example bakers and orders.</span>
+    <span>Screens are recreated for this tour with example bakers and orders. Cake photos from Unsplash.</span>
     <a href="https://sweetmap.vercel.app/" target="_blank" rel="noopener">Try the real app at sweetmap.vercel.app ↗</a>
   </div>
 </footer>
 
 <script>
 (function(){
-/* ---------- little helpers ---------- */
-function cake(top, base, tiers, deco){
-  // simple illustrated cake; colours are the cake's own
-  var s='<svg viewBox="0 0 100 100" aria-hidden="true">';
-  s+='<ellipse cx="50" cy="88" rx="40" ry="6" fill="#E9D6D2"/>';
-  var y=84, w=70;
-  for(var t=0;t<tiers;t++){
-    var h=tiers>1?22:30, x=50-w/2;
-    s+='<rect x="'+x+'" y="'+(y-h)+'" width="'+w+'" height="'+h+'" rx="6" fill="'+base+'"/>';
-    s+='<path d="M'+x+' '+(y-h+6)+'q0-6 6-6h'+(w-12)+'q6 0 6 6v4c-4 0-4 5-8 5s-4-6-8-6-4 7-8 7-4-6-8-6-4 5-8 5-4-6-8-6-4 4-8 4z" fill="'+top+'"/>';
-    y-=h; w-=18;
-  }
-  if(deco==='candle'){s+='<rect x="48" y="'+(y-14)+'" width="4" height="14" rx="1.5" fill="#F8B0C8"/><path d="M50 '+(y-22)+'c3 3 3 5 0 7-3-2-3-4 0-7z" fill="#F2B13C"/>';}
-  if(deco==='flower'){for(var i=0;i<3;i++){var cx=38+i*12;s+='<circle cx="'+cx+'" cy="'+(y-3)+'" r="5" fill="#F8B0C8"/><circle cx="'+cx+'" cy="'+(y-3)+'" r="2" fill="#F2C94C"/>';}}
-  if(deco==='berry'){s+='<circle cx="42" cy="'+(y-3)+'" r="4.5" fill="#C2185B"/><circle cx="52" cy="'+(y-4)+'" r="4.5" fill="#AD1457"/><circle cx="61" cy="'+(y-3)+'" r="4" fill="#C2185B"/><path d="M50 '+(y-10)+'l2-3 2 3" stroke="#3F7D4E" stroke-width="1.5" fill="none"/>';}
-  if(deco==='sprinkle'){var c=['#F8B0C8','#7FB5E6','#F2C94C','#8CCB9B'];for(var k=0;k<8;k++){s+='<rect x="'+(34+k*4)+'" y="'+(y+2+(k%3)*3)+'" width="3" height="1.4" rx=".7" fill="'+c[k%4]+'" transform="rotate('+(k*37%60-30)+' '+(35+k*4)+' '+(y+3)+')"/>';}}
-  return s+'</svg>';
-}
-var CAKES={
-  bloom: cake('#FBE3EC','#F9D0DE',2,'flower'),
-  velvet: cake('#FFFFFF','#B0303F',1,'berry'),
-  bento: cake('#DDEDE4','#FBEACF',1,'candle'),
-  choc: cake('#5B2E1E','#7A4330',2,'berry'),
-  cup: cake('#F8B0C8','#FBEACF',1,'sprinkle'),
-  grad: cake('#E3E5F1','#FFFFFF',2,'candle')
+var SITE='https://sweetmap-walkthrough.vercel.app/';
+/* ---------- photos (Unsplash) ---------- */
+var PH={
+  bloom:'1562777717-dc6984f65a63', berry:'1535141192574-5d4897c12636', bento:'1616690710400-a16d146927c5',
+  choc:'1578985545062-69928b1d9587', cup:'1519869325930-281384150729', grad:'1588195538326-c5b1e9f80a1b',
+  rainbow:'1464347744102-11db6282f854', pipe:'1586985289688-ca3cf47d3e6e', shelf:'1517433670267-08bbd4be890f',
+  forest:'1605807646983-377bc5a76493', pinkcup:'1607478900766-efe13248b125', mintcup:'1587668178277-295251f900ce',
+  slice:'1571115177098-24ec42ed204d', lilac:'1559620192-032c4bc4674e', balloons:'1530103862676-de8c9debad1d',
+  confetti:'1513151233558-d860c5398176', mousse:'1602351447937-745cb720612f', naked:'1606890737304-57a1ca8a5b62',
+  cherrycup:'1599785209707-a456fc1337bb', cone:'1621303837174-89787a7d4729', gold:'1627834377411-8da5f4f09de8',
+  tarts:'1495147466023-ac5c588e2e94', mint:'1486427944299-d1955d23e34d', orange:'1542826438-bd32f43d626f'
 };
-function thumb(k,bg,h){return '<div class="thumb" style="background:'+bg+';height:'+(h||96)+'px">'+CAKES[k]+'</div>';}
+function U(k,w,h){return 'https://images.unsplash.com/photo-'+(PH[k]||k)+'?auto=format&fit=crop&w='+w+(h?'&h='+h:'')+'&q=70';}
+function hydrate(root){(root||document).querySelectorAll('img[data-ph]').forEach(function(im){
+  var w=+im.dataset.w||600,h=+im.dataset.h||0;
+  im.src=U(im.dataset.ph,w,h); im.srcset=U(im.dataset.ph,w*2,h*2)+' 2x'; im.removeAttribute('data-ph');
+});}
+
+/* ---------- little helpers ---------- */
+function thumb(k,bg,h){return '<div class="thumb" style="background:'+bg+';height:'+(h||96)+'px"><img src="'+U(k,280,280)+'" alt="" loading="lazy"></div>';}
 function av(t,c,s){s=s||34;return '<div class="av" style="width:'+s+'px;height:'+s+'px;background:'+c+';font-size:'+(s*.38)+'px">'+t+'</div>';}
+var MARK='<svg viewBox="0 0 40 40" width="30" height="30" aria-hidden="true"><path d="M20 33C12 24 8 19 8 14a12 12 0 0 1 24 0c0 5-4 10-12 19z" fill="#F8B0C8"/><path d="M20 19.5c-3.4-2.5-5-4.2-5-6.1 0-1.6 1.2-2.7 2.6-2.7 1 0 1.9.6 2.4 1.4.5-.8 1.4-1.4 2.4-1.4 1.4 0 2.6 1.1 2.6 2.7 0 1.9-1.6 3.6-5 6.1z" fill="#733D26"/></svg>';
 var IC={
   menu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',
   back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>',
@@ -336,23 +725,26 @@ var IC={
   heart:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20s-7-4.4-9-8.8C1.6 8 3.6 4.5 7 4.5c2 0 3.4 1.1 5 2.9 1.6-1.8 3-2.9 5-2.9 3.4 0 5.4 3.5 4 6.7-2 4.4-9 8.8-9 8.8z"/></svg>',
   heartF:'<svg width="15" height="15" viewBox="0 0 24 24" fill="#E86A97"><path d="M12 20s-7-4.4-9-8.8C1.6 8 3.6 4.5 7 4.5c2 0 3.4 1.1 5 2.9 1.6-1.8 3-2.9 5-2.9 3.4 0 5.4 3.5 4 6.7-2 4.4-9 8.8-9 8.8z"/></svg>',
   search:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
-  img:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>',
   check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg>',
-  bolt:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>'
+  bolt:'<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  lock:'<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0z"/></svg>',
+  share:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13M7 8l5-5 5 5"/><path d="M5 12v8h14v-8"/></svg>',
+  plus:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>'
 };
-function sbar(light){return '<div class="sbar'+(light?' light':'')+'"><span>9:41</span><span>●●● ▮</span></div>';}
+function sbar(light){return '<div class="sbar'+(light===true?' light':light?' '+light:'')+'"><span>9:41</span><span>●●● ▮</span></div>';}
 function topbar(left,right){return sbar()+'<div class="top">'+(left||'<span class="w"><b>Sweet</b>Map</span>')+(right||'<span class="icon">'+IC.menu+'</span>')+'</div>';}
 function titlebar(t){return sbar()+'<div class="top"><span class="row" style="gap:8px"><span class="icon">'+IC.back+'</span><b style="font-size:15px">'+t+'</b></span><span class="w" style="font-size:18px"><b>Sweet</b>Map</span></div>';}
 var STAGES=['received','accepted','baking','decorating','ready','delivered'];
 var SL={received:'Order received',accepted:'Accepted',baking:'Baking',decorating:'Decorating',ready:'Ready',delivered:'Delivered'};
 var SPILL={received:'p-sky',accepted:'p-butter',baking:'p-lilac',decorating:'p-blush',ready:'p-mint',delivered:'p-mint'};
 function timeline(cur){
-  var ci=STAGES.indexOf(cur), when=['Mon 09:12','Mon 10:40','Thu 08:30','Thu 13:05','',''];
+  var ci=STAGES.indexOf(cur), when=['Mon 09:12','Mon 10:40','Thu 08:30','Thu 13:05','Sat 10:15','Sat 11:02'];
   return '<div class="timeline">'+STAGES.map(function(s,i){
     var cls=i<ci?'done':(i===ci?'now':'');
     return '<div class="tl '+cls+'"><span class="dot"></span><div><b>'+SL[s]+'</b><small>'+(i<=ci?when[i]:'Waiting')+'</small></div></div>';
   }).join('')+'</div>';
 }
+function mini(html,s,cls){return '<div class="mini '+(cls||'static')+'" style="--s:'+s+'"><div class="phone"><div class="notch"></div><div class="screen"><div class="app">'+html+'</div></div></div></div>';}
 
 /* ---------- screens: customer ---------- */
 function signup(role){
@@ -380,45 +772,46 @@ function roleCard(t,d,on,ic){
     '<span><b style="font-size:14px">'+t+'</b><br><span class="sub" style="margin:0">'+d+'</span></span></div>';
 }
 function feed(){
-  var items=[['bloom','#FBEFF3','Pastel bloom birthday','Mutinta\'s Bakes','K450',true],['velvet','#F9EDEA','Red velvet classic','Ndola Crumbs','K380'],['bento','#EEF6F1','Bento for two','Sugar & Clay','K150'],['choc','#F4ECE6','Chocolate drip, 2 tier','Kabwe Cake Co.','K620'],['cup','#FDF5E8','Sprinkle cupcakes, dozen','Mutinta\'s Bakes','K240'],['grad','#EEEFF7','Graduation cap cake','Bwalya Bakes','K520']];
+  var items=[['bloom','#FBEFF3','Pastel bloom birthday','Mutinta\'s Bakes','K450',true],['berry','#F9EDEA','Berry cream, 2 tier','Ndola Crumbs','K380'],['bento','#EEF6F1','Pink drip party cake','Sugar & Clay','K350'],['choc','#F4ECE6','Chocolate drip, 2 tier','Kabwe Cake Co.','K620'],['cup','#FDF5E8','Sprinkle cupcakes, dozen','Mutinta\'s Bakes','K240'],['grad','#EEEFF7','White chocolate drip','Bwalya Bakes','K520']];
   return topbar()+
     '<div style="background:var(--cocoa);padding:0 14px 14px"><div class="field ph" style="border:0">'+IC.search+'Search cakes, flavours, bakers</div></div>'+
     '<div class="tabs" style="margin-top:4px"><span class="on">For you</span><span>Following</span><span>Nearby</span></div>'+
     '<div class="chips" style="margin:10px 0">'+['Birthday','Wedding','Cupcakes','Bento Cakes','Baby Shower','Graduation','Cheesecake','Custom'].map(function(c,i){return '<span class="chip'+(i===0?' on':'')+'">'+c+'</span>';}).join('')+'</div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px 18px">'+items.map(function(it,i){
-      return '<div class="card'+(i===0?' hot':'')+'" '+(i===0?'data-next':'')+' style="padding:6px">'+thumb(it[0],it[1],92)+
+      return '<div class="card'+(i===0?' hot':'')+'" '+(i===0?'data-next':'')+' style="padding:6px">'+thumb(it[0],it[1],108)+
       '<div style="padding:6px 4px 2px"><b style="font-size:12px;display:block;line-height:1.25">'+it[2]+'</b><div class="row" style="justify-content:space-between;margin-top:3px"><span class="sub" style="margin:0;font-size:10.5px">'+it[3]+'</span>'+(it[5]?IC.heartF:'<span style="color:var(--sub)">'+IC.heart+'</span>')+'</div><b style="font-size:12px;color:var(--cocoa)">'+it[4]+'</b></div></div>';
     }).join('')+'</div>';
 }
 function design(){
   return titlebar('Design')+
-    '<div style="background:#FBEFF3;height:200px;display:grid;place-items:center">'+CAKES.bloom.replace('<svg','<svg style="width:62%"')+'</div>'+
+    '<div class="thumb" style="height:220px;border-radius:0;background:#FBEFF3"><img src="'+U('bloom',640,440)+'" alt="Pastel bloom birthday cake"></div>'+
     '<div class="pad"><div class="row" style="justify-content:space-between"><h3 class="h">Pastel bloom birthday cake</h3><b style="color:var(--cocoa);font-size:16px">K450</b></div>'+
     '<div class="row" style="margin-top:8px">'+av('MB','#C26A8A',28)+'<span><b>Mutinta\'s Bakes</b><br><span class="sub" style="margin:0">Kabulonga · <span class="star">★</span> 4.9 (38)</span></span></div>'+
     '<p style="margin:10px 0">Two tiers of vanilla sponge, buttercream blooms, serves 20.</p>'+
     '<div class="row" style="gap:6px;flex-wrap:wrap"><span class="pill p-blush">Birthday</span><span class="pill p-sky">pastel</span><span class="pill p-lilac">floral</span></div>'+
     '<div class="row" style="margin-top:16px;gap:8px"><button class="abtn ghost" style="width:auto;padding:0 16px">'+IC.heartF+'&nbsp;Saved</button><button class="abtn hot" data-next>Order this design</button></div>'+
-    '<div class="lbl" style="margin-top:18px">More like this</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+thumb('cup','#FDF5E8',70)+thumb('grad','#EEEFF7',70)+thumb('bento','#EEF6F1',70)+'</div></div>';
+    '<div class="lbl" style="margin-top:18px">More like this</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+thumb('lilac','#FDF5E8',70)+thumb('cone','#EEEFF7',70)+thumb('pinkcup','#EEF6F1',70)+'</div></div>';
 }
 function bakers(){
-  var list=[['MB','#C26A8A','Mutinta\'s Bakes','Kabulonga','1.2 km','4.9','38','K300',false,['bloom','cup','velvet']],['SC','#6E8F7B','Sugar & Clay','Woodlands','2.0 km','4.7','21','K150',false,['bento','grad','cup']],['KC','#8A5A44','Kabwe Cake Co.','Chilenje','4.6 km','4.8','52','K400',true,['choc','velvet','bloom']]];
+  var list=[['MB','#C26A8A','Mutinta\'s Bakes','Kabulonga','1.2 km','4.9','38','K300',false,['bloom','cup','lilac']],['SC','#6E8F7B','Sugar & Clay','Woodlands','2.0 km','4.7','21','K150',false,['bento','mintcup','cone']],['KC','#8A5A44','Kabwe Cake Co.','Chilenje','4.6 km','4.8','52','K400',true,['choc','forest','naked']]];
   return topbar()+
     '<div class="pad" style="padding-bottom:6px"><h3 class="h">Bakers near you</h3><p class="sub">Closest first · Woodlands</p></div>'+
     '<div style="display:grid;gap:10px;padding:6px 14px 18px">'+list.map(function(b,i){
       return '<div class="card" style="padding:12px"><div class="row">'+av(b[0],b[1],40)+'<div style="flex:1;min-width:0"><b style="font-size:14px">'+b[2]+'</b><div class="sub" style="margin:0">'+IC.pin+' '+b[3]+' · '+b[4]+'</div><div class="sub" style="margin:0"><span class="star">★</span> '+b[5]+' ('+b[6]+') · from '+b[7]+(b[8]?' · <span class="pill p-butter" style="padding:1px 7px">Fully booked</span>':'')+'</div></div></div>'+
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px">'+b[9].map(function(k){return thumb(k,'#F6EAEC',56);}).join('')+'</div>'+
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px">'+b[9].map(function(k){return thumb(k,'#F6EAEC',60);}).join('')+'</div>'+
       '<div class="row" style="margin-top:10px;gap:8px"><button class="abtn ghost sm" style="flex:1">Follow</button><button class="abtn sm'+(i===0?' hot':'')+'" '+(i===0?'data-next':'')+' style="flex:1">View shop</button></div></div>';
     }).join('')+'</div>';
 }
 function storefront(isOwner){
   return titlebar('Storefront')+
-    '<div style="background:linear-gradient(#F6EAEC,#F8F8F7);padding:16px 14px;text-align:center">'+'<div style="display:grid;place-items:center">'+av('MB','#C26A8A',62)+'</div>'+
+    '<div style="position:relative;height:92px"><div class="thumb" style="height:92px;border-radius:0"><img src="'+U('shelf',640,200)+'" alt=""></div></div>'+
+    '<div style="background:linear-gradient(#F6EAEC,#F8F8F7);padding:0 14px 16px;text-align:center">'+'<div style="display:grid;place-items:center;margin-top:-32px;position:relative"><div style="border:3px solid #fff;border-radius:50%">'+av('MB','#C26A8A',62)+'</div></div>'+
     '<h3 class="h" style="margin-top:8px">Mutinta\'s Bakes</h3><p class="sub">Buttercream specialist working from a home kitchen in Kabulonga.</p>'+
     '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px"><div class="stat"><b>24</b><small>Designs</small></div><div class="stat"><b>312</b><small>Followers</small></div><div class="stat"><b>4.9</b><small>Rating</small></div></div>'+
     '<div class="row" style="margin-top:10px;gap:8px">'+(isOwner?'<button class="abtn ghost sm" style="flex:1">Manage your storefront</button>':'<button class="abtn ghost sm" style="flex:1">Follow</button><button class="abtn sm" style="flex:1">Message</button>')+'</div>'+
     '<div class="sub" style="margin-top:8px">Delivers to Kabulonga, Woodlands, Chilenje · Weekend special: free cupcakes with any 2 tier</div></div>'+
     '<div class="pad"><div class="lbl" style="margin-top:0">Cake gallery</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">'+
-    ['bloom','cup','velvet','grad','choc','bento'].map(function(k,i){return '<div class="'+(i===0&&!isOwner?'hot':'')+'" '+(i===0&&!isOwner?'data-next':'')+' style="border-radius:14px">'+thumb(k,'#F6EAEC',78)+'</div>';}).join('')+'</div>'+
+    ['bloom','cup','berry','lilac','choc','pinkcup'].map(function(k,i){return '<div class="'+(i===0&&!isOwner?'hot':'')+'" '+(i===0&&!isOwner?'data-next':'')+' style="border-radius:14px">'+thumb(k,'#F6EAEC',84)+'</div>';}).join('')+'</div>'+
     '<div class="lbl">Reviews</div><div class="card" style="padding:10px"><div class="row" style="justify-content:space-between"><b>Natasha K.</b><span class="star">★★★★★</span></div><p style="margin:4px 0 0">Exactly like the photo, and delivered an hour early for the party.</p></div></div>';
 }
 function order(){
@@ -435,11 +828,12 @@ function order(){
     '<p class="sub" style="margin:10px 0">The baker confirms before any payment is due.</p>'+
     '<button class="abtn hot" data-next>Send order request</button><div style="height:16px"></div></div>';
 }
-function tracking(){
+function tracking(st){
+  st=st||'baking';
   return topbar()+
     '<div class="pad"><h3 class="h">Your orders</h3><p class="sub">Follow every cake from order received through to delivered.</p>'+
     '<div class="card" style="padding:12px;margin-top:12px"><div class="row"><div style="width:54px">'+thumb('bloom','#FBEFF3',54)+'</div><div style="flex:1"><b>Pastel bloom birthday cake</b><div class="sub" style="margin:0">Mutinta\'s Bakes · needed Sat 7 Nov</div></div></div>'+
-    '<div class="row" style="justify-content:space-between;margin:10px 0 4px"><span class="pill p-lilac">Baking</span><b style="color:var(--cocoa)">K450</b></div>'+timeline('baking')+
+    '<div class="row" style="justify-content:space-between;margin:10px 0 4px"><span class="pill '+SPILL[st]+'">'+SL[st]+'</span><b style="color:var(--cocoa)">K450</b></div>'+timeline(st)+
     '<button class="abtn ghost hot" data-next style="margin-top:6px">Message baker</button></div>'+
     '<div class="card" style="padding:12px;margin-top:10px"><div class="row"><div style="width:44px">'+thumb('cup','#FDF5E8',44)+'</div><div style="flex:1"><b>Sprinkle cupcakes</b><div class="sub" style="margin:0">Sugar & Clay · 12 Oct</div></div><span class="pill p-mint">Delivered</span></div></div></div>';
 }
@@ -452,7 +846,9 @@ function messages(role){
     '<div class="bubble '+(me?'me':'them')+'">Of course. I\'ll do lilac and white blooms with a gold message. Same price.</div>'+
     '<div class="bubble '+(me?'them':'me')+'">Perfect, thank you 💜</div>'+
     '<div class="bubble '+(me?'me':'them')+'">Sponges are in the oven now. I\'ll update the order when I start decorating.</div>'+
-    '<div class="field ph" style="margin-top:20px">Write a message…<span class="abtn sm hot" data-next style="margin-left:auto">Send</span></div></div>';
+    '<div class="thumb" style="height:120px;width:70%;'+(me?'margin-left:auto':'')+'"><img src="'+U('pipe',400,240)+'" alt="Cake being iced"></div>'+
+    '<div class="bubble '+(me?'me':'them')+'" style="font-size:12px">Decorating now ✨</div>'+
+    '<div class="field ph" style="margin-top:12px">Write a message…<span class="abtn sm hot" data-next style="margin-left:auto">Send</span></div></div>';
 }
 function urgentCustomer(){
   return topbar()+
@@ -469,7 +865,7 @@ function quote(a,c,n,d,p,note,hot){
   return '<div class="card" style="padding:10px;margin-top:8px"><div class="row">'+av(a,c,32)+'<div style="flex:1"><b>'+n+'</b><div class="sub" style="margin:0">'+d+' · '+note+'</div></div><b style="color:var(--cocoa);font-size:15px">'+p+'</b></div><button class="abtn sm'+(hot?' hot':' ghost')+'" '+(hot?'data-next':'')+' style="width:100%;margin-top:8px">Accept</button></div>';
 }
 function finishCustomer(){
-  return topbar()+'<div class="pad" style="text-align:center;padding-top:40px"><div style="display:grid;place-items:center">'+'<div style="width:180px">'+thumb('bloom','#FBEFF3',170)+'</div></div>'+
+  return topbar()+'<div class="pad" style="text-align:center;padding-top:24px"><div class="thumb" style="height:210px;border-radius:22px"><img src="'+U('bloom',600,420)+'" alt="The delivered cake"></div>'+
     '<span class="pill p-mint" style="margin-top:14px">Delivered</span><h3 class="h" style="margin-top:10px">Enjoy the party, Chipo!</h3><p class="sub">How was your cake from Mutinta\'s Bakes?</p>'+
     '<div style="font-size:30px;margin:10px 0" class="star">★★★★★</div><div class="field ph" style="text-align:left">Exactly like the photo…</div><div style="height:10px"></div><button class="abtn">Post review</button></div>';
 }
@@ -487,13 +883,14 @@ function dashboard(){
     '<div class="card" style="padding:12px;margin-top:8px"><div class="row"><div style="width:40px">'+thumb('choc','#F4ECE6',40)+'</div><div style="flex:1"><b>Chocolate drip, 2 tier</b><div class="sub" style="margin:0">Mwila B. · pickup</div></div><span class="pill p-sky">New</span></div></div>'+
     '<div class="lbl">Coming up</div><div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--sand)"><span>Sprinkle cupcakes · Fri</span><span class="pill p-blush">Decorating</span></div><div class="row" style="justify-content:space-between;padding:6px 0"><span>Wedding 3 tier · Sat</span><span class="pill p-lilac">Baking</span></div></div>';
 }
-function statusScreen(){
-  var i=STAGES.indexOf(bakerStatus), nxt=STAGES[i+1];
+function statusScreen(st){
+  st=st||bakerStatus;
+  var i=STAGES.indexOf(st), nxt=STAGES[i+1];
   return titlebar('Update status')+
     '<div class="pad"><div class="card" style="padding:12px"><b>Pastel bloom birthday cake</b><div class="sub" style="margin:0">Chipo Mwansa · Sat 7 Nov · Vanilla, 2 tier · K450</div>'+
     '<div class="field" style="margin-top:8px;font-weight:500;font-size:12px;min-height:0">"Happy 30th Bupe" in gold. No nuts, please.</div></div>'+
     '<p class="sub" style="margin:12px 0 4px">Customers see each step on their tracking page.</p>'+
-    '<div class="card" style="padding:12px">'+timeline(bakerStatus)+'</div>'+
+    '<div class="card" style="padding:12px">'+timeline(st)+'</div>'+
     '<div style="height:12px"></div>'+
     (nxt?'<button class="abtn" id="advance">Move to “'+SL[nxt]+'”</button>':'<button class="abtn hot" data-next>Done. Back to dashboard</button>')+
     '<p class="sub" style="text-align:center;margin-top:8px">'+(nxt?'Tap to move this order forward, one step at a time':'Order delivered. The customer can now leave a review.')+'</p></div>';
@@ -501,12 +898,12 @@ function statusScreen(){
 function createPost(){
   return titlebar('Create a post')+
     '<div class="pad"><p class="sub" style="margin:0 0 10px">Show off a bake. It goes straight into everyone\'s feed.</p>'+
-    '<div style="position:relative">'+thumb('choc','#F4ECE6',150)+'<span class="pill" style="position:absolute;right:8px;top:8px;background:#fff">Remove photo</span></div>'+
+    '<div style="position:relative">'+thumb('choc','#F4ECE6',160)+'<span class="pill" style="position:absolute;right:8px;top:8px;background:#fff">Remove photo</span></div>'+
     '<div class="sub" style="margin-top:4px">JPG, PNG or WebP. Resized on your phone before upload.</div>'+
     '<div class="lbl">Title</div><div class="field">Chocolate drip, 2 tier</div>'+
-    '<div class="lbl">Description</div><div class="field" style="font-weight:500">Dark chocolate sponge, ganache drip, fresh berries. Serves 25.</div>'+
+    '<div class="lbl">Description</div><div class="field" style="font-weight:500">Dark chocolate sponge, ganache drip, cream rosettes. Serves 25.</div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div class="lbl">Category</div><div class="field">Birthday</div></div><div><div class="lbl">Price (K)</div><div class="field">620</div></div></div>'+
-    '<div class="lbl">Tags</div><div class="field">chocolate, drip, berries</div>'+
+    '<div class="lbl">Tags</div><div class="field">chocolate, drip, rosettes</div>'+
     '<div class="sub" style="margin-top:4px">Tags and category decide where this shows up in “More like this”.</div>'+
     '<div style="height:12px"></div><button class="abtn hot" data-next>Publish</button><div style="height:16px"></div></div>';
 }
@@ -531,6 +928,23 @@ function urgentBaker(){
     '<div class="card" style="padding:12px;margin-top:10px"><div class="row" style="justify-content:space-between"><span class="pill p-butter">Sat</span><span class="sub" style="margin:0">Chilenje · 3.4 km</span></div><b style="display:block;margin-top:8px">24 cupcakes, blue and white, christening</b><div class="sub" style="margin:2px 0 0">No quotes yet</div></div></div>';
 }
 
+/* ---------- screens: setup ---------- */
+function browserScreen(){
+  return sbar(true)+'<div class="urlbar">'+IC.lock+' sweetmap.vercel.app<span class="shr hl">'+IC.share+'</span></div><div style="height:8px"></div>'+signup('customer');
+}
+function shareSheet(){
+  return feed()+'<div class="dim"></div><div class="sheet"><div class="hd"><span class="appicon" style="width:40px;height:40px;border-radius:11px;margin:0;background:#733D26">'+MARK+'</span><span><b>SweetMap</b><br><span class="sub" style="margin:0">sweetmap.vercel.app</span></span></div>'+
+    '<div class="grp"><div class="it">Copy<span>⧉</span></div><div class="it">Add to Favourites<span>☆</span></div></div>'+
+    '<div class="it hl">Add to Home Screen'+IC.plus+'</div>'+
+    '<div class="grp"><div class="it">Find on Page<span>⌕</span></div></div></div>';
+}
+function homeScreen(){
+  var apps=[['#5AC8FA','Clock'],['#FFCC00','Notes'],['#8E8E93','Camera'],['#FF9500','Photos'],['#34C759','Calls'],['#5856D6','Music'],['#FF2D55','Calendar'],['#007AFF','Mail'],['#A2845E','Files'],['#30B0C7','Weather']];
+  return '<div class="home">'+sbar('clear')+'<div class="grid">'+apps.map(function(a){return '<div><span class="appicon" style="background:'+a[0]+'"></span><span>'+a[1]+'</span></div>';}).join('')+
+    '<div><span class="appicon hl" style="background:#733D26">'+MARK+'</span><span>SweetMap</span></div></div>'+
+    '<div class="dock"><span class="appicon" style="background:#34C759;width:48px;height:48px"></span><span class="appicon" style="background:#007AFF;width:48px;height:48px"></span><span class="appicon" style="background:#FF9500;width:48px;height:48px"></span><span class="appicon" style="background:#5856D6;width:48px;height:48px"></span></div></div>';
+}
+
 /* ---------- flows ---------- */
 var FLOWS={
   customer:{
@@ -542,7 +956,7 @@ var FLOWS={
       {t:'Compare bakers near her',b:'Before ordering she checks who\'s close by. Bakers are sorted by distance, with ratings, starting prices and a peek at their work.',n:['Bakers who are fully booked are clearly marked','Follow a baker to see their new designs first'],s:bakers},
       {t:'Visit the baker\'s storefront',b:'Each baker has a shop page with their gallery, delivery areas, weekend special and reviews from past customers.',n:['Followers, designs and rating at a glance','She can message the baker before ordering'],s:function(){return storefront(false);}},
       {t:'Order straight from the photo',b:'The order form already knows the design. Chipo adds flavour, size, date, budget, delivery area and the message for the cake.',n:['Four short sections, no back-and-forth','The baker confirms before any payment is due','She can upload her own inspiration photo instead'],s:order},
-      {t:'Track the cake as it\'s made',b:'Her orders page shows every stage, from Order received to Delivered. When the baker updates the order, the tracker moves.',n:['Six clear stages','Past orders stay in her history'],s:tracking},
+      {t:'Track the cake as it\'s made',b:'Her orders page shows every stage, from Order received to Delivered. When the baker updates the order, the tracker moves.',n:['Six clear stages','Past orders stay in her history'],s:function(){return tracking();}},
       {t:'Chat with the baker',b:'Small changes like colour or wording are sorted in the built-in chat, tied to the order.',n:['Both sides see the conversation in Messages','No need to swap WhatsApp numbers first'],s:function(){return messages('customer');}},
       {t:'Need a cake tomorrow?',b:'For last-minute orders Chipo posts an urgent request. Nearby bakers send quotes and she accepts the one she likes.',n:['Bakers compete on price and timing','Budget is optional'],s:urgentCustomer},
       {t:'Delivered, then reviewed',b:'When the cake arrives the order closes and Chipo can leave a review. That review helps the next customer choose.',n:['Reviews build each baker\'s rating'],s:finishCustomer,last:true}
@@ -553,8 +967,8 @@ var FLOWS={
     steps:[
       {t:'Open a shop for free',b:'Mutinta signs up as a Baker with her business name and area. Her storefront is live straight away.',n:['Baker tools only appear on Baker accounts'],s:function(){return signup('baker');}},
       {t:'Run the day from the dashboard',b:'New orders, work in progress, delivered cakes and total order value sit on one screen. Every order arrives with the full brief.',n:['Tabs for Orders, Designs and Storefront','“Coming up” sorts work by the date it\'s needed'],s:dashboard},
-      {t:'Move orders forward in one tap',b:'Each tap moves the order to the next stage and the customer\'s tracker updates. Try it: tap the button until the cake is delivered.',n:['Received → Accepted → Baking → Decorating → Ready → Delivered','No need to send status messages by hand'],s:statusScreen,interactive:true},
-      {t:'Keep customers in the loop',b:'Questions about colours, wording or allergies are answered in chat, next to the order.',n:['One conversation per customer'],s:function(){return messages('baker');}},
+      {t:'Move orders forward in one tap',b:'Each tap moves the order to the next stage and the customer\'s tracker updates. Try it: tap the button until the cake is delivered.',n:['Received → Accepted → Baking → Decorating → Ready → Delivered','No need to send status messages by hand'],s:function(){return statusScreen();},interactive:true},
+      {t:'Keep customers in the loop',b:'Questions about colours, wording or allergies are answered in chat, next to the order. A quick photo shows progress.',n:['One conversation per customer'],s:function(){return messages('baker');}},
       {t:'Post new designs',b:'A photo, a title, a price and a few tags. The design lands in customers\' feeds and on her storefront.',n:['Photos are resized on the phone to save data','Tags decide where it appears in “More like this”'],s:createPost},
       {t:'Set up the storefront',b:'She controls what customers see: about text, prices from, WhatsApp number, specialities, delivery areas and a weekend special.',n:['“Fully booked” switch for busy weeks','Delivery areas can be any neighbourhood'],s:storefrontEdit},
       {t:'Win urgent jobs',b:'Customers who need a cake fast post requests. Mutinta sends a price and a note, and the customer picks a quote.',n:['Requests show distance and budget','Extra income on quiet days'],s:urgentBaker},
@@ -563,17 +977,17 @@ var FLOWS={
   }
 };
 
-/* ---------- state & render ---------- */
+/* ---------- tour state & render ---------- */
 var mode='customer', idx=0;
 var $=function(id){return document.getElementById(id);};
-function setMode(m, keepScroll){
+function setMode(m, writeHash){
   mode=m; idx=0;
-  document.querySelectorAll('.modes button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.mode===m?'true':'false');});
+  document.querySelectorAll('#tour .modes button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.mode===m?'true':'false');});
   var plat=m==='platform';
   $('platform').hidden=!plat; $('stage').hidden=plat;
   $('lead').textContent=plat?'What happens behind the screens, and what each type of account can do.':FLOWS[m].lead;
   if(!plat){bakerStatus='received';buildList();render();}
-  try{history.replaceState(null,'','#'+m);}catch(e){}
+  if(writeHash){try{history.replaceState(null,'','#'+m);}catch(e){}}
 }
 function buildList(){
   var f=FLOWS[mode];
@@ -596,8 +1010,12 @@ function render(){
   });
 }
 function go(d){var n=idx+d, L=FLOWS[mode].steps.length; if(n<0||n>=L)return; idx=n; render();}
+function openTour(m,step){
+  setMode(m,true); if(step){idx=step;render();}
+  $('tour').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+}
 
-document.querySelector('.modes').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setMode(b.dataset.mode);});
+document.querySelector('#tour .modes').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setMode(b.dataset.mode,true);});
 $('steplist').addEventListener('click',function(e){var b=e.target.closest('button');if(b){idx=+b.dataset.i;render();}});
 $('prev').addEventListener('click',function(){go(-1);});
 $('next').addEventListener('click',function(){go(1);});
@@ -615,13 +1033,191 @@ $('screen').addEventListener('click',function(e){
   if(e.target.closest('[data-next]'))go(1);
 });
 document.addEventListener('keydown',function(e){
-  if(mode==='platform'||/INPUT|TEXTAREA/.test(e.target.tagName))return;
+  if(mode==='platform'||/INPUT|TEXTAREA/.test(e.target.tagName)||e.target.closest('#filmwrap'))return;
+  var r=$('tour').getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight)return;
   if(e.key==='ArrowRight')go(1); else if(e.key==='ArrowLeft')go(-1);
 });
-$('start').addEventListener('click',function(e){e.preventDefault();setMode('customer');$('tour').scrollIntoView({behavior:'smooth'});});
+document.querySelectorAll('[data-mode-link]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();openTour(a.dataset.modeLink);});});
+window.addEventListener('hashchange',function(){var h=location.hash.slice(1);if(FLOWS[h]||h==='platform')openTour(h);});
 
+/* ---------- hero, strip, gallery ---------- */
+$('heroA').innerHTML=mini(feed(),.58);
+$('heroB').innerHTML=mini(tracking('decorating'),.5);
+var STRIP=[['bloom','Pastel bloom','Mutinta\'s Bakes · K450'],['choc','Chocolate drip','Kabwe Cake Co. · K620'],['cup','Sprinkle cupcakes','Mutinta\'s Bakes · K240'],['berry','Berry cream','Ndola Crumbs · K380'],['bento','Pink drip party','Sugar & Clay · K350'],['forest','Black forest','Kabwe Cake Co. · K480'],['lilac','Blackberry bloom','Bwalya Bakes · K420'],['pinkcup','Swirl cupcakes','Sugar & Clay · K210'],['grad','White choc drip','Bwalya Bakes · K520'],['cone','Ice-cream party','Sugar & Clay · K400'],['slice','Coffee layer cake','Ndola Crumbs · K360'],['gold','Gold drip','Mutinta\'s Bakes · K650']];
+var sh=STRIP.map(function(x){return '<figure><img data-ph="'+x[0]+'" data-w="180" data-h="130" alt="'+x[1]+'" loading="lazy"><figcaption>'+x[1]+'<span>'+x[2]+'</span></figcaption></figure>';}).join('');
+$('strip').innerHTML=sh+sh.replace(/alt="[^"]*"/g,'alt="" aria-hidden="true"');
+var GAL=[['customer',1,feed,'Home feed','Real cakes from home bakers, with prices.'],['customer',2,design,'Design page','Rating, tags and one-tap ordering.'],['customer',3,bakers,'Bakers near you','Sorted by distance, with a peek at their work.'],['customer',5,order,'Order form','The whole brief in four short sections.'],['customer',6,function(){return tracking();},'Order tracker','Six stages, updated by the baker.'],['baker',1,dashboard,'Baker dashboard','Orders, progress and order value.'],['baker',4,createPost,'Post a design','Photo, price in K and tags.'],['baker',7,function(){return storefront(true);},'Storefront','Gallery, followers and reviews.']];
+$('gallery').innerHTML=GAL.map(function(g,i){return '<button data-g="'+i+'" aria-label="Open '+g[3]+' in the tour">'+mini(g[2](),.52)+'<span class="cap"><b>'+g[3]+'</b><span>'+g[4]+'</span></span></button>';}).join('');
+$('gallery').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var g=GAL[+b.dataset.g];openTour(g[0],g[1]);});
+
+/* ---------- setup ---------- */
+var SETUP={
+  customer:[
+    ['Open the link on your phone','Type sweetmap.vercel.app into Chrome or Safari, or tap a link someone shared with you.',browserScreen,''],
+    ['Add it to your home screen','On iPhone, tap Share then “Add to Home Screen”.',shareSheet,'On Android (Chrome), tap ⋮ then “Add to Home screen” or “Install app”.'],
+    ['Open it like an app','SweetMap now sits next to your other apps and opens full screen.',homeScreen,''],
+    ['Create a Cake Lover account','Add your name and area, or tap the crosshair for GPS. Then start browsing.',function(){return signup('customer');},'']
+  ],
+  baker:[
+    ['Sign up as a Baker','Choose “Baker”, then add your name, business name and the area you bake from.',function(){return signup('baker');},''],
+    ['Fill in your storefront','Add an about line, prices from, your WhatsApp number and the areas you deliver to.',storefrontEdit,'Use the “Fully booked” switch in busy weeks.'],
+    ['Post your best cakes','Upload a photo, title, price in K and tags. Start with three or more designs.',createPost,'Good photos win orders. See the tips below.'],
+    ['Take orders and update them','New orders land on your dashboard. Tap “Update status” as you bake so customers can follow along.',dashboard,'']
+  ]
+};
+function renderSetup(who){
+  document.querySelectorAll('[data-setup]').forEach(function(b){b.setAttribute('aria-selected',b.dataset.setup===who?'true':'false');});
+  $('setupSteps').innerHTML=SETUP[who].map(function(s,i){
+    return '<article class="scard">'+mini(s[2](),.56)+'<span class="num">'+(i+1)+'</span><h3>'+s[0]+'</h3><p>'+s[1]+'</p>'+(s[3]?'<div class="note">'+s[3]+'</div>':'')+'</article>';
+  }).join('');
+  $('bakerTips').hidden=who!=='baker';
+}
+document.querySelector('.who-switch').addEventListener('click',function(e){var b=e.target.closest('button');if(b)renderSetup(b.dataset.setup);});
+renderSetup('customer');
+
+/* ---------- share ---------- */
+$('wa').href='https://wa.me/?text='+encodeURIComponent('Take a look at SweetMap, a way to find home bakers and order cakes from a photo: '+SITE);
+$('copy').addEventListener('click',function(){
+  var b=this;
+  function done(){b.textContent='Link copied ✓';setTimeout(function(){b.textContent='Copy link';},2000);}
+  try{navigator.clipboard.writeText(SITE).then(done,function(){prompt('Copy this link',SITE);});}catch(e){prompt('Copy this link',SITE);}
+});
+
+/* ================= FILM ================= */
+var film=$('filmbox'), scenesEl=$('scenes');
+var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function bg(k,cls,extra){return '<div class="bgimg '+(cls||'')+'" style="background-image:url('+U(k,1600,1000)+')'+(extra||'')+'"></div>';}
+function txt(k,n,h,p,cls,script){
+  return '<div class="sc-text '+(cls||'')+'">'+(k?'<span class="sc-k rv" style="--d:.2s">'+(n?'<b>'+n+'</b>':'')+k+'</span>':'')+
+    '<h3 class="sc-h rv'+(script?' script':'')+'" style="--d:.45s">'+h+'</h3>'+(p?'<p class="sc-p rv" style="--d:.8s">'+p+'</p>':'')+'</div>';
+}
+function fphone(html,id,delay){return '<div class="sc-phone"><div class="rvp" style="--d:'+(delay||'.3s')+'"><div class="mini film-m" id="'+id+'" style="--s:var(--fs)"><div class="phone"><div class="notch"></div><div class="screen"><div class="app">'+html+'</div></div></div></div></div></div>';}
+function cur(){return scenesEl.lastElementChild;}
+function q(s){var c=cur();return c?c.querySelector(s):null;}
+function tap(id,x,y){var sc=q('#'+id+' .screen');if(!sc)return;var d=document.createElement('span');d.className='tapdot';d.style.left=x+'px';d.style.top=y+'px';sc.appendChild(d);setTimeout(function(){d.remove();},1100);}
+function scrollApp(id,to,dur){
+  var a=q('#'+id+' .app'); if(!a)return; var from=a.scrollTop, t0=performance.now();
+  if(to==='end')to=a.scrollHeight-a.clientHeight;
+  (function st(t){if(!playing){t0+=16;}var p=Math.min(1,(t-t0)/dur);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;a.scrollTop=from+(to-from)*e;if(p<1&&a.isConnected)requestAnimationFrame(st);})(t0);
+}
+function setApp(id,html){var a=q('#'+id+' .app');if(a)a.innerHTML=html;}
+function toastIn(id,msg){var a=q('#'+id+' .app');if(!a)return;var t=document.createElement('div');t.className='toast';t.style.position='sticky';t.style.bottom='16px';t.style.margin='-60px 14px 16px';t.innerHTML=IC.check+' '+msg;a.appendChild(t);}
+function confetti(n){var c=['#F8B0C8','#F2C94C','#8CCB9B','#7FB5E6','#fff','#E86A97'],s='';for(var i=0;i<n;i++){s+='<span style="left:'+(Math.random()*100)+'%;background:'+c[i%c.length]+';animation-duration:'+(2.6+Math.random()*2.4)+'s;animation-delay:'+(Math.random()*1.6)+'s;transform:rotate('+(Math.random()*180)+'deg)"></span>';}return '<div class="confetti">'+s+'</div>';}
+
+var FILM=[
+  {ch:'Saturday',img:'rainbow',d:5200,build:function(){
+    return bg('rainbow')+'<div class="shade"></div>'+txt('Lusaka · Monday','', 'Saturday is Bupe’s 30th.','Her sister Chipo wants a cake that looks like the one she saw online, made by someone local.','',true);
+  }},
+  {ch:'Discover',img:'bloom',d:7600,build:function(){
+    return bg('lilac','alt')+'<div class="shade"></div>'+txt('Discover','1','A feed full of real cakes from home kitchens.','Chipo opens SweetMap and scrolls cakes from bakers near her, each with a price in Kwacha.')+fphone(feed(),'fA');
+  },cues:[[1300,function(){scrollApp('fA',360,2300);}],[3900,function(){scrollApp('fA',0,1300);}],[5800,function(){tap('fA',84,330);}],[6500,function(){setApp('fA',design());}]]},
+  {ch:'Order',img:'pipe',d:8200,build:function(){
+    return bg('bloom','alt')+'<div class="shade"></div>'+txt('Order from the photo','2','Love it? Order that exact design.','Flavour, size, date, budget and the message on the cake go in one short form. No back-and-forth.')+fphone(design(),'fB','.1s');
+  },cues:[[1600,function(){tap('fB',230,492);}],[2300,function(){setApp('fB',order());}],[3000,function(){scrollApp('fB','end',2800);}],[6300,function(){tap('fB',154,600);}],[6800,function(){toastIn('fB','Order sent to Mutinta’s Bakes');}]]},
+  {ch:'The baker',img:'shelf',d:6800,build:function(){
+    return bg('pipe')+'<div class="shade"></div>'+txt('Meanwhile in Kabulonga','3','Mutinta’s phone lights up.','A new order with the full brief: design, flavour, date, budget and the message to pipe.')+
+      fphone(dashboard()+'<div class="notif" id="nt"><span class="appicon" style="width:34px;height:34px;border-radius:10px;margin:0;background:#733D26">'+MARK+'</span><span style="font-size:12px"><b>New order · K450</b><br>Pastel bloom birthday cake, Sat 7 Nov</span></div>','fC');
+  },cues:[[1200,function(){var n=q('#nt');if(n)n.classList.add('show');}],[4200,function(){var n=q('#nt');if(n)n.classList.remove('show');}],[4900,function(){tap('fC',232,402);}]]},
+  {ch:'Baking',img:'choc',d:9600,build:function(){
+    return bg('pipe','bgfade show',';z-index:0')+bg('slice','bgfade alt')+bg('bloom','bgfade')+'<div class="shade"></div>'+
+      txt('One order, two screens','4','Every tap on her side moves the tracker on his.','Accepted. Baking. Decorating. Ready. Chipo never has to ask “is it done yet?”','narrow')+
+      '<div class="sc-text narrow" style="top:auto;bottom:10%;transform:none"><span class="stagechip rv" style="--d:1s"><i></i><span id="stc">Order received</span></span></div>'+
+      '<div class="sc-duo"><div class="rvp duo" style="--d:.3s"><div><div class="lab">MUTINTA · BAKER</div><div class="mini film-m" id="fD" style="--s:var(--fs2)"><div class="phone"><div class="notch"></div><div class="screen"><div class="app">'+statusScreen('received')+'</div></div></div></div></div>'+
+      '<div><div class="lab">CHIPO · CAKE LOVER</div><div class="mini film-m" id="fE" style="--s:var(--fs2)"><div class="phone"><div class="notch"></div><div class="screen"><div class="app">'+tracking('received')+'</div></div></div></div></div></div></div>';
+  },cues:(function(){var a=[],seq=['accepted','baking','decorating','ready'],bgs=[0,1,1,2];seq.forEach(function(st,i){var t=1500+i*1900;a.push([t-500,function(){tap('fD',154,442);}]);a.push([t,function(){setApp('fD',statusScreen(st));setApp('fE',tracking(st));var c=q('#stc');if(c)c.textContent=SL[st];var b=cur().querySelectorAll('.bgfade');b.forEach(function(x,j){x.classList.toggle('show',j===bgs[i]);});}]);});return a;})()},
+  {ch:'Delivered',img:'balloons',d:7400,build:function(){
+    return bg('bloom')+'<div class="shade soft"></div>'+confetti(46)+txt('Saturday, 11:02','5','Delivered. Exactly like the photo.','The order closes, and Chipo’s review helps the next customer choose.','narrow')+
+      '<div class="revpos"><div class="revcard rvp" style="--d:.7s"><span class="pill p-mint">Delivered</span><h4>Mutinta’s Bakes</h4><div class="stars">'+[0,1,2,3,4].map(function(i){return '<span style="--i:'+i+'">★</span>';}).join('')+'</div><p>“Exactly like the photo, and here an hour early. Bupe loved the lilac blooms.”</p><p style="margin-top:.6em;font-weight:800;color:#3B2418">Chipo M. · Woodlands</p></div></div>';
+  }},
+  {ch:'Try it',img:'confetti',d:5000,end:true,build:function(){
+    return bg('choc','alt')+'<div class="shade full"></div><div class="endcard"><div><div class="word rv" style="--d:.2s"><b>Sweet</b>Map</div><p class="rv" style="--d:.5s">Find a home baker, order from a photo, and watch your cake come to life.</p>'+
+      '<div class="row2 rv" style="--d:.8s"><a class="btn btn-pink" href="https://sweetmap.vercel.app/" target="_blank" rel="noopener">Open SweetMap ↗</a><a class="btn btn-line" href="#tour" data-film-tour>Click through the app</a><button class="btn btn-line" data-replay type="button">Replay</button></div></div></div>';
+  }}
+];
+var TOTAL=FILM.reduce(function(a,s){return a+s.d;},0), STARTS=[], acc=0;
+FILM.forEach(function(s){STARTS.push(acc);acc+=s.d;});
+var fi=0, ft=0, fired=0, playing=false, last=0, ended=false;
+function fmt(ms){var s=Math.round(ms/1000);return Math.floor(s/60)+':'+('0'+s%60).slice(-2);}
+$('ptime').textContent=Math.round(TOTAL/1000)+' seconds · no sound needed';
+
+// chapters + ticks
+$('chapters').innerHTML=FILM.map(function(s,i){return '<button data-c="'+i+'"><img src="'+U(s.img,80,80)+'" alt="">'+s.ch+'</button>';}).join('');
+FILM.forEach(function(s,i){if(i){var t=document.createElement('span');t.className='tick';t.style.left=(STARTS[i]/TOTAL*100)+'%';$('fbar').appendChild(t);}});
+
+function loadScene(i){
+  fi=i; ft=0; fired=0; ended=false;
+  var old=scenesEl.children;
+  for(var k=0;k<old.length;k++){(function(o){o.classList.remove('on');setTimeout(function(){o.remove();},750);})(old[k]);}
+  var el=document.createElement('div'); el.className='scene s'+i; el.innerHTML=FILM[i].build();
+  scenesEl.appendChild(el); void el.offsetWidth; el.classList.add('on');
+  document.querySelectorAll('#chapters button').forEach(function(b,j){b.setAttribute('aria-current',j===i?'true':'false');});
+  var cb=document.querySelector('#chapters button[data-c="'+i+'"]');
+  if(cb&&playing){var cs=$('chapters');cs.scrollTo({left:cb.offsetLeft-cs.clientWidth/2+cb.clientWidth/2,behavior:'smooth'});}
+  if(FILM[i+1]){var pre=new Image();pre.src=U(FILM[i+1].img,1600,1000);}
+}
+function setPlaying(p){
+  playing=p; film.classList.toggle('paused',!p);
+  $('fplay').setAttribute('aria-label',p?'Pause':'Play');
+  $('fplay').innerHTML=p?'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>':'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  if(p){$('poster').hidden=true;last=performance.now();}
+}
+function play(){if(ended){loadScene(0);}setPlaying(true);}
+function tick(now){
+  if(playing){
+    ft+=Math.min(100,now-last); last=now;
+    var cues=FILM[fi].cues||[];
+    while(fired<cues.length&&cues[fired][0]<=ft){try{cues[fired][1]();}catch(e){}fired++;}
+    if(ft>=FILM[fi].d){
+      if(fi<FILM.length-1)loadScene(fi+1);
+      else{ft=FILM[fi].d;ended=true;setPlaying(false);}
+    }
+  }
+  var el=STARTS[fi]+Math.min(ft,FILM[fi].d), pct=el/TOTAL*100;
+  $('ffill').style.width=pct+'%'; $('fbar').setAttribute('aria-valuenow',Math.round(pct));
+  $('ftime').textContent=fmt(el)+' / '+fmt(TOTAL);
+  requestAnimationFrame(tick);
+}
+function seekScene(i){loadScene(i);if(!playing){setPlaying(true);}}
+$('poster').addEventListener('click',play);
+$('fplay').addEventListener('click',function(){playing?setPlaying(false):play();});
+$('chapters').addEventListener('click',function(e){var b=e.target.closest('button');if(b)seekScene(+b.dataset.c);});
+$('fbar').addEventListener('click',function(e){var r=this.getBoundingClientRect(),t=(e.clientX-r.left)/r.width*TOTAL,i=0;while(i<FILM.length-1&&STARTS[i+1]<=t)i++;seekScene(i);});
+$('fbar').addEventListener('keydown',function(e){if(e.key==='ArrowRight'&&fi<FILM.length-1){e.preventDefault();seekScene(fi+1);}else if(e.key==='ArrowLeft'){e.preventDefault();seekScene(Math.max(0,ft<1500?fi-1:fi));}});
+film.addEventListener('click',function(e){
+  if(e.target.closest('[data-replay]')){seekScene(0);return;}
+  var t=e.target.closest('[data-film-tour]'); if(t){e.preventDefault();setPlaying(false);openTour('customer');return;}
+  if(!e.target.closest('a,button')&&$('poster').hidden){playing?setPlaying(false):play();}
+});
+$('ffull').addEventListener('click',function(){
+  var w=$('filmwrap');
+  if(document.fullscreenElement){document.exitFullscreen();}
+  else if(w.requestFullscreen){w.requestFullscreen().then(function(){if(!playing)play();}).catch(function(){});}
+  else if(w.webkitRequestFullscreen){w.webkitRequestFullscreen();}
+});
+$('watch').addEventListener('click',function(){if(!playing)setTimeout(play,RM?0:450);});
+function fit(){
+  var w=film.clientWidth,h=film.clientHeight; if(!w||!h)return;
+  var portrait=w/h<1.1; film.classList.toggle('portrait',portrait);
+  var s,s2;
+  if(portrait){s=Math.min(h*.58/680,w*.62/330);s2=Math.min(h*.56/680,w*.43/330);film.style.fontSize=Math.max(11,Math.min(18,w/400*14))+'px';}
+  else{s=h*.84/680;s2=Math.min(h*.8/680,w*.215/330);film.style.fontSize=Math.max(10,Math.min(26,w/1088*16))+'px';}
+  film.style.setProperty('--fs',s.toFixed(3)); film.style.setProperty('--fs2',s2.toFixed(3));
+}
+if(window.ResizeObserver)new ResizeObserver(fit).observe(film); else window.addEventListener('resize',fit);
+fit(); loadScene(0); requestAnimationFrame(tick);
+// autoplay once when the film first comes into view (not for reduced motion)
+if(!RM&&window.IntersectionObserver){
+  var seen=false; new IntersectionObserver(function(es){es.forEach(function(en){
+    if(en.isIntersecting&&en.intersectionRatio>.55&&!seen){seen=true;play();}
+    else if(!en.isIntersecting&&playing){setPlaying(false);}
+  });},{threshold:[0,.55]}).observe(film);
+}
+document.addEventListener('visibilitychange',function(){if(document.hidden&&playing)setPlaying(false);});
+
+/* ---------- boot ---------- */
+hydrate();
 var h=(location.hash||'').slice(1);
-setMode(FLOWS[h]||h==='platform'?h:'customer');
+setMode(FLOWS[h]||h==='platform'?h:'customer',false);
 })();
 </script>
 
